@@ -7,6 +7,10 @@
 - **Features:** `docs/features/` — SSOT for product capabilities (usually tied to `[feature]` work items).
 - **Milestones:** shippable slices — in a feature doc when delivery is large.
 
+## Progress (not the launch bar)
+
+M1 is **shipped** — scaffold, `src/engine.ts` (+ tests), and minimal `gameReducer` / `useGame` (`NEW_GAME`, `MOVE_MADE`). Board UI and full game UX remain for M2/M3.
+
 ## MVP bar (v1 target)
 
 **Local 2-player chess runs locally via `npm run dev`** — two humans play a full rules-legal game on one device in the browser. No deploy required for MVP.

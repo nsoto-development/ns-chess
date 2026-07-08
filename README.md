@@ -2,7 +2,7 @@
 
 Browser chess built as a portfolio piece — hand-crafted UI on top of proven rule logic, with room to grow into a Stockfish opponent later.
 
-**Status:** In development (product docs and planning complete; app scaffold not started yet)
+**Status:** M1 complete — Vite/React/TS/Tailwind scaffold, `engine.ts` wrapper, and minimal `gameReducer` + `useGame`. Board UI is next (M2).
 
 Planned live URL: [chess.nsoto.dev](https://chess.nsoto.dev) (P2)
 
@@ -12,16 +12,23 @@ A two player full rules-legal game on one screen — hot-seat, client-side, no b
 
 Rule logic lives in a thin [`chess.js`](https://github.com/jhlywa/chess.js) wrapper (`src/engine.ts`). Components talk to a reducer hook, never to `chess.js` directly.
 
-## Planned features
+## Features
 
-### v1 — local 2-player (P0)
+### Shipped — M1
+
+- Vite + React + TypeScript (strict) + Tailwind + Vitest scaffold
+- `src/engine.ts` — chess.js wrapper with colocated rule tests
+- `src/gameReducer.ts` + `src/hooks/useGame.ts` — minimal state (`NEW_GAME`, `MOVE_MADE`)
+- `npm test` and `npm run build` pass
+
+### Remaining — local 2-player (P0, M2/M3)
 
 - Custom `Board` / `Square` / `Piece` with Unicode pieces
 - Click-to-move and legal-move highlighting
 - Pawn promotion modal (Q/R/B/N)
 - Move list / PGN, game status (check, checkmate, stalemate, draw)
-- Undo and new game
-- Vitest coverage for engine and reducer
+- Undo and new game (reducer UI flow)
+- Additional reducer tests (undo, promotion flow)
 
 ### Later
 
@@ -35,11 +42,12 @@ See [`docs/roadmap.md`](docs/roadmap.md) for the full backlog.
 
 ## Tech stack
 
-- **Runtime:** React 18, TypeScript (strict)
-- **Build:** Vite
-- **Styling:** Tailwind CSS
-- **Rules:** chess.js (wrapped, not reimplemented)
+- **Runtime:** React 19, TypeScript (strict)
+- **Build:** Vite 7
+- **Styling:** Tailwind CSS v4
+- **Rules:** chess.js 1.4 (wrapped in `src/engine.ts`, not reimplemented)
 - **Tests:** Vitest
+- **Tooling:** Node 22 (pinned via [Volta](https://volta.sh) in `package.json`)
 - **AI (planned):** Stockfish.js via Web Worker + UCI layer
 
 ## Architecture
@@ -49,7 +57,8 @@ src/
 ├── engine.ts          # chess.js wrapper — rules only
 ├── gameReducer.ts     # game state and actions
 ├── hooks/useGame.ts   # React hook for components
-├── components/        # Board, MoveList, GameStatus, PromotionModal, …
+├── types.ts           # GameMode, MoveInput, …
+├── components/        # M2+ — Board, MoveList, GameStatus, PromotionModal, …
 └── App.tsx
 ```
 
@@ -59,7 +68,7 @@ Details: [`docs/features/local-2-player.md`](docs/features/local-2-player.md)
 
 ## Getting started
 
-> App scaffold (M1) is the next implementation milestone. Commands below apply once that lands.
+Requires **Node 22.23.1** (see `"volta"` in [`package.json`](package.json)). With [Volta](https://volta.sh) installed, the version is selected automatically when you enter this directory; otherwise use Node **≥ 22.12**.
 
 ```bash
 git clone https://github.com/nsoto-development/ns-chess.git
@@ -69,7 +78,7 @@ npm run dev
 ```
 
 ```bash
-npm test        # Vitest
+npm test        # Vitest — 15 tests (engine + reducer smoke)
 npm run build   # production build
 ```
 
