@@ -9,7 +9,7 @@
 
 ## Progress (not the launch bar)
 
-M1 is **shipped** — scaffold, `src/engine.ts` (+ tests), and minimal `gameReducer` / `useGame` (`NEW_GAME`, `MOVE_MADE`). Board UI and full game UX remain for M2/M3.
+M2 is **shipped** — hand-built `Board` / `Square` / `Piece` with click-to-move, legal-move highlighting, and Unicode pieces. Move list, status, undo, new game, and promotion modal remain for M3.
 
 ## MVP bar (v1 target)
 

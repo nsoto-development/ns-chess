@@ -2,7 +2,7 @@
 
 Browser chess built as a portfolio piece — hand-crafted UI on top of proven rule logic, with room to grow into a Stockfish opponent later.
 
-**Status:** M1 complete — Vite/React/TS/Tailwind scaffold, `engine.ts` wrapper, and minimal `gameReducer` + `useGame`. Board UI is next (M2).
+**Status:** M2 complete — hand-built board (`Board` / `Square` / `Piece`), click-to-move, legal-move highlighting, Unicode pieces. M3 adds move list, status, undo, and promotion modal.
 
 Planned live URL: [chess.nsoto.dev](https://chess.nsoto.dev) (P2)
 
@@ -21,10 +21,14 @@ Rule logic lives in a thin [`chess.js`](https://github.com/jhlywa/chess.js) wrap
 - `src/gameReducer.ts` + `src/hooks/useGame.ts` — minimal state (`NEW_GAME`, `MOVE_MADE`)
 - `npm test` and `npm run build` pass
 
-### Remaining — local 2-player (P0, M2/M3)
+### Shipped — M2
 
-- Custom `Board` / `Square` / `Piece` with Unicode pieces
-- Click-to-move and legal-move highlighting
+- `src/components/Board.tsx`, `Square.tsx`, `Piece.tsx` — click-to-move, legal-move highlighting, Unicode pieces
+- Wired into `App.tsx`; white on bottom; pawn promotion auto-queens until M3 modal
+- `MOVE_MADE` uses a fresh engine from FEN (pure reducer; React Strict Mode safe)
+
+### Remaining — local 2-player (P0, M3)
+
 - Pawn promotion modal (Q/R/B/N)
 - Move list / PGN, game status (check, checkmate, stalemate, draw)
 - Undo and new game (reducer UI flow)
@@ -58,7 +62,7 @@ src/
 ├── gameReducer.ts     # game state and actions
 ├── hooks/useGame.ts   # React hook for components
 ├── types.ts           # GameMode, MoveInput, …
-├── components/        # M2+ — Board, MoveList, GameStatus, PromotionModal, …
+├── components/        # Board, Square, Piece (M2); MoveList, GameStatus, PromotionModal (M3)
 └── App.tsx
 ```
 
@@ -78,7 +82,7 @@ npm run dev
 ```
 
 ```bash
-npm test        # Vitest — 15 tests (engine + reducer smoke)
+npm test        # Vitest — 16 tests (engine + reducer)
 npm run build   # production build
 ```
 

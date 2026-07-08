@@ -43,4 +43,16 @@ describe('gameReducer', () => {
     expect(next.fen).toBe(STARTING_FEN);
     expect(next.moveHistory).toEqual([]);
   });
+
+  it('stays consistent when reducer runs twice (Strict Mode)', () => {
+    const state = createInitialState();
+    const action = { type: 'MOVE_MADE' as const, move: { from: 'e2', to: 'e4' } };
+
+    gameReducer(state, action);
+    const next = gameReducer(state, action);
+
+    expect(next.turn).toBe('b');
+    expect(next.moveHistory).toEqual(['e4']);
+    expect(next.engine.board()[4][4]).toMatchObject({ type: 'p', color: 'w' });
+  });
 });
