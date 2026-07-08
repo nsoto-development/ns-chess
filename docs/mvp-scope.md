@@ -9,7 +9,7 @@
 
 ## Progress (not the launch bar)
 
-M2 is **shipped** — hand-built `Board` / `Square` / `Piece` with click-to-move, legal-move highlighting, and Unicode pieces. Move list, status, undo, new game, and promotion modal remain for M3.
+M3 is **shipped** — local 2-player MVP is complete: move list / PGN, game status, undo, new game, and promotion modal (Q/R/B/N).
 
 ## MVP bar (v1 target)
 

@@ -55,8 +55,8 @@ Flat `src/` layout — no nested `chess/` or `state/` folders at this scope.
 | # | Milestone | Status | Deliverables |
 |---|-----------|--------|--------------|
 | M1 | Scaffold + engine + reducer | Done | P0 #1 + #2: Vite/React/TS/Tailwind/Vitest; `engine.ts` + tests; `gameReducer` skeleton + `useGame`; `npm test` / `npm run build` |
-| M2 | Board click-to-move | Done | P0 #3 partial: `Board`, `Square`, `Piece`; selection + legal highlights; Unicode pieces v1; auto-queen promotion interim until M3 modal |
-| M3 | Complete MVP | Planned | P0 #3 complete: `MoveList`, `GameStatus`, undo, new game, `PromotionModal` (Q/R/B/N); edge-case tests |
+| M2 | Board click-to-move | Done | P0 #3 partial: `Board`, `Square`, `Piece`; selection + legal highlights; Unicode pieces v1 |
+| M3 | Complete MVP | Done | P0 #3 complete: `MoveList`, `GameStatus`, undo, new game, `PromotionModal` (Q/R/B/N); edge-case tests |
 
 **Quick gate:** each implementation thread names **one milestone** (e.g. “M1 only”), not the whole P-tier.
 
@@ -64,8 +64,10 @@ Flat `src/` layout — no nested `chess/` or `state/` folders at this scope.
 
 **M2 board scope (shipped):** selection state lives in `Board` (local `useState`); `onMove` prop drives `makeMove`. Pawn promotion auto-queens until M3 `PromotionModal`. `MOVE_MADE` rebuilds the engine from `state.fen` before applying a move so the reducer stays pure under React Strict Mode.
 
+**M3 scope (shipped):** `UNDO`, `PROMOTION_PENDING`, and `pendingPromotion` in reducer state; `MoveList`, `GameStatus`, `PromotionModal`; sidebar layout in `App.tsx` with undo/new-game controls; board disabled when game over or promotion pending; reducer edge-case tests.
+
 ## Tests / verify
 
 - `src/engine.test.ts` — rules, promotion, castling, en passant, game-over
-- `src/gameReducer.test.ts` — `NEW_GAME`, `MOVE_MADE`, illegal-move guard, Strict Mode double-invoke regression; undo and promotion flow in M3
+- `src/gameReducer.test.ts` — `NEW_GAME`, `MOVE_MADE`, `UNDO`, `PROMOTION_PENDING`, illegal-move guard, Strict Mode regression, promotion flow, checkmate, stalemate, castling, en passant
 - `npm test`, `npm run build`
