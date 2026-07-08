@@ -2,7 +2,7 @@
 
 Browser chess built as a portfolio piece — hand-crafted UI on top of proven rule logic, with room to grow into a Stockfish opponent later.
 
-**Status:** M2 complete — hand-built board (`Board` / `Square` / `Piece`), click-to-move, legal-move highlighting, Unicode pieces. M3 adds move list, status, undo, and promotion modal.
+**Status:** M3 complete — local 2-player MVP ships move list / PGN, game status, undo, new game, and promotion modal (Q/R/B/N).
 
 Planned live URL: [chess.nsoto.dev](https://chess.nsoto.dev) (P2)
 
@@ -24,15 +24,17 @@ Rule logic lives in a thin [`chess.js`](https://github.com/jhlywa/chess.js) wrap
 ### Shipped — M2
 
 - `src/components/Board.tsx`, `Square.tsx`, `Piece.tsx` — click-to-move, legal-move highlighting, Unicode pieces
-- Wired into `App.tsx`; white on bottom; pawn promotion auto-queens until M3 modal
+- Wired into `App.tsx`; white on bottom
 - `MOVE_MADE` uses a fresh engine from FEN (pure reducer; React Strict Mode safe)
 
-### Remaining — local 2-player (P0, M3)
+### Shipped — M3
 
-- Pawn promotion modal (Q/R/B/N)
-- Move list / PGN, game status (check, checkmate, stalemate, draw)
-- Undo and new game (reducer UI flow)
-- Additional reducer tests (undo, promotion flow)
+- `MoveList` — SAN move list and PGN display
+- `GameStatus` — check, checkmate, stalemate, draw banner
+- `PromotionModal` — Q/R/B/N picker (replaces M2 auto-queen)
+- Undo and new game (`UNDO`, `PROMOTION_PENDING` reducer actions)
+- Sidebar layout in `App.tsx`; board disabled when game over or promotion pending
+- Reducer edge-case tests (undo, promotion, checkmate, stalemate, castling, en passant)
 
 ### Later
 
@@ -62,7 +64,7 @@ src/
 ├── gameReducer.ts     # game state and actions
 ├── hooks/useGame.ts   # React hook for components
 ├── types.ts           # GameMode, MoveInput, …
-├── components/        # Board, Square, Piece (M2); MoveList, GameStatus, PromotionModal (M3)
+├── components/        # Board, Square, Piece, MoveList, GameStatus, PromotionModal
 └── App.tsx
 ```
 
@@ -82,7 +84,7 @@ npm run dev
 ```
 
 ```bash
-npm test        # Vitest — 16 tests (engine + reducer)
+npm test        # Vitest — engine + reducer tests
 npm run build   # production build
 ```
 

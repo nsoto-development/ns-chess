@@ -14,7 +14,7 @@ I include them in this portfolio repo to show how I work with modern AI-forward 
 
 | Doc | Capability |
 |-----|------------|
-| [`local-2-player.md`](local-2-player.md) | Hot-seat chess — board, moves, status, promotion (P0) |
+| [`local-2-player.md`](local-2-player.md) | Hot-seat chess — board, moves, status, promotion (P0; **M3 shipped**) |
 | [`vs-ai.md`](vs-ai.md) | Stockfish opponent in a Web Worker (P1) |
 
 Broader context:

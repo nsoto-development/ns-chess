@@ -109,6 +109,15 @@ export class ChessEngine {
   pgn(): string {
     return this.chess.pgn();
   }
+
+  loadPgn(pgn: string): boolean {
+    try {
+      this.chess.loadPgn(pgn);
+      return true;
+    } catch {
+      return false;
+    }
+  }
 }
 
 export function createEngine(fen?: string): ChessEngine {
