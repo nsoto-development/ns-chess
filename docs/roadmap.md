@@ -8,8 +8,8 @@ Ordered **backlog**: **priority tiers** (P0/P1/P2) group **numbered work items**
 
 ## Status (where we are)
 
-- **Last shipped:** M1 — scaffold + engine + reducer skeleton (P0 #1, #2 **Done**)
-- **Current focus:** P0 #3 — M2 board click-to-move (see [`docs/features/local-2-player.md`](features/local-2-player.md))
+- **Last shipped:** M2 — board click-to-move with legal highlights (P0 #3 partial)
+- **Current focus:** P0 #3 — M3 complete MVP (see [`docs/features/local-2-player.md`](features/local-2-player.md))
 - **Pre-launch / MVP:** see [`mvp-scope.md`](mvp-scope.md)
 
 ---
@@ -33,7 +33,7 @@ Local 2-player MVP spans three work items and three milestones. **Milestones are
 | Milestone | Work items | Outcome |
 |-----------|------------|---------|
 | **M1** | #1 scaffold + #2 engine | **Done** — Vite/React/TS/Tailwind/Vitest; `engine.ts` + tests; `gameReducer` skeleton + `useGame`; `npm test`, `npm run build` |
-| **M2** | #3 local 2-player (partial) | `Board` / `Square` / `Piece`; click-to-move; legal-move highlighting; Unicode pieces v1 |
+| **M2** | #3 local 2-player (partial) | **Done** — `Board` / `Square` / `Piece`; click-to-move; legal-move highlighting; Unicode pieces v1 |
 | **M3** | #3 local 2-player (complete) | `MoveList` / PGN, `GameStatus`, undo, new game, `PromotionModal` (Q/R/B/N); edge-case tests |
 
 Full SSOT for behavior, code paths, and tests: [`docs/features/local-2-player.md`](features/local-2-player.md).
@@ -44,7 +44,7 @@ Full SSOT for behavior, code paths, and tests: [`docs/features/local-2-player.md
 
 1. `[chore]` **App scaffold** — Vite, React, TypeScript strict, Tailwind, Vitest; `npm test` and `npm run build` pass — **Done** (M1)
 2. `[feature]` **Chess engine layer** — `src/engine.ts` thin wrapper over `chess.js` + colocated tests (no UI) — **Done** (M1)
-3. `[feature]` **Local 2-player game** — board UI, moves, status, undo, promotion, new game (see [`features/local-2-player.md`](features/local-2-player.md)) — **In progress** (M2/M3)
+3. `[feature]` **Local 2-player game** — board UI, moves, status, undo, promotion, new game (see [`features/local-2-player.md`](features/local-2-player.md)) — **In progress** (M3)
 
 ---
 

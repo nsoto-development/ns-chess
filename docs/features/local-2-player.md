@@ -34,7 +34,7 @@ Tracks **[feature] work items P0 #2 and P0 #3** on [`docs/roadmap.md`](../roadma
 Implemented in M1 where noted; remainder land in later milestones.
 
 - **`GameMode` type stub:** `'local' | 'vsAI'` in `src/types.ts` — **Done** (M1)
-- **Move-source abstraction:** `Board` accepts moves from human input or engine without rework — vs-AI drives the same path (M2+)
+- **Move-source abstraction:** `Board` accepts moves from human input or engine without rework — vs-AI drives the same path — **Done** (M2)
 - **Engine-agnostic reducer actions:** dispatch `MOVE_MADE`, not `HUMAN_MOVED` — **Done** (M1)
 - **Worker mount point** in `App.tsx` reserved for Stockfish (comment only until P1 vs-AI) — **Done** (M1)
 
@@ -55,15 +55,17 @@ Flat `src/` layout — no nested `chess/` or `state/` folders at this scope.
 | # | Milestone | Status | Deliverables |
 |---|-----------|--------|--------------|
 | M1 | Scaffold + engine + reducer | Done | P0 #1 + #2: Vite/React/TS/Tailwind/Vitest; `engine.ts` + tests; `gameReducer` skeleton + `useGame`; `npm test` / `npm run build` |
-| M2 | Board click-to-move | Planned | P0 #3 partial: `Board`, `Square`, `Piece`; selection + legal highlights; Unicode pieces v1 |
+| M2 | Board click-to-move | Done | P0 #3 partial: `Board`, `Square`, `Piece`; selection + legal highlights; Unicode pieces v1; auto-queen promotion interim until M3 modal |
 | M3 | Complete MVP | Planned | P0 #3 complete: `MoveList`, `GameStatus`, undo, new game, `PromotionModal` (Q/R/B/N); edge-case tests |
 
 **Quick gate:** each implementation thread names **one milestone** (e.g. “M1 only”), not the whole P-tier.
 
 **M1 reducer scope (shipped):** `NEW_GAME` and `MOVE_MADE` only; state holds `fen`, `turn`, `mode`, `moveHistory`. `UNDO` and `pendingPromotion` actions arrive in M3.
 
+**M2 board scope (shipped):** selection state lives in `Board` (local `useState`); `onMove` prop drives `makeMove`. Pawn promotion auto-queens until M3 `PromotionModal`. `MOVE_MADE` rebuilds the engine from `state.fen` before applying a move so the reducer stays pure under React Strict Mode.
+
 ## Tests / verify
 
 - `src/engine.test.ts` — rules, promotion, castling, en passant, game-over
-- `src/gameReducer.test.ts` — M1 smoke tests (`NEW_GAME`, `MOVE_MADE`); undo and promotion flow in M3
+- `src/gameReducer.test.ts` — `NEW_GAME`, `MOVE_MADE`, illegal-move guard, Strict Mode double-invoke regression; undo and promotion flow in M3
 - `npm test`, `npm run build`

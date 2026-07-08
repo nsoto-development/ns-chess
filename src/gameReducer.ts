@@ -36,17 +36,13 @@ export function gameReducer(state: GameState, action: GameAction): GameState {
     case 'NEW_GAME':
       return syncFromEngine(createEngine());
     case 'MOVE_MADE': {
-      const result = state.engine.move(action.move);
+      const engine = createEngine(state.fen);
+      const result = engine.move(action.move);
       if (!result) {
         return state;
       }
 
-      return {
-        ...state,
-        fen: state.engine.fen(),
-        turn: state.engine.turn(),
-        moveHistory: state.engine.history(),
-      };
+      return syncFromEngine(engine, state.mode);
     }
   }
 }
