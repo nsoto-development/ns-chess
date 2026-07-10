@@ -1,0 +1,38 @@
+/* nsoto.dev design system — root stylesheet.
+   Consumers link only this file; it @imports the full token closure. */
+
+@import "./tokens/fonts.css";
+@import "./tokens/colors.css";
+@import "./tokens/typography.css";
+@import "./tokens/spacing.css";
+@import "./tokens/effects.css";
+
+/* minimal global reset — kept here since it can't live inline in DCs,
+   but consumers of this DS as plain CSS get it as part of the closure */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background: var(--bg-canvas);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  line-height: var(--leading-normal);
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  color: var(--link);
+  text-decoration: none;
+}
+
+a:hover {
+  color: var(--link-hover);
+  text-decoration: underline;
+}
+
+::selection {
+  background: var(--brand-wash-strong);
+  color: var(--text-primary);
+}

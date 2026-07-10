@@ -1,0 +1,22 @@
+<!-- @dsCard group="Spacing" viewport="700x160" name="Spacing Scale" subtitle="4px base grid" -->
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="../../styles.css">
+<style>
+  body { margin: 0; padding: 20px; background: var(--bg-canvas); font-family: var(--font-mono); font-size: 10px; color: var(--text-tertiary); }
+  .row { display: flex; align-items: center; gap: 10px; margin-bottom: 6px; }
+  .bar { background: var(--brand); height: 10px; border-radius: 2px; }
+  .lbl { width: 40px; }
+</style>
+</head>
+<body>
+  <div class="row"><span class="lbl">4</span><div class="bar" style="width: var(--space-1)"></div></div>
+  <div class="row"><span class="lbl">8</span><div class="bar" style="width: var(--space-2)"></div></div>
+  <div class="row"><span class="lbl">16</span><div class="bar" style="width: var(--space-4)"></div></div>
+  <div class="row"><span class="lbl">24</span><div class="bar" style="width: var(--space-6)"></div></div>
+  <div class="row"><span class="lbl">32</span><div class="bar" style="width: var(--space-8)"></div></div>
+  <div class="row"><span class="lbl">48</span><div class="bar" style="width: var(--space-12)"></div></div>
+  <div class="row"><span class="lbl">64</span><div class="bar" style="width: var(--space-16)"></div></div>
+</body>
+</html>

@@ -1,0 +1,54 @@
+<!-- @dsCard group="Portfolio" viewport="1200x900" name="Landing Page" subtitle="Interactive click-through — nav, hero, projects, about, contact" -->
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>nsoto.dev — portfolio UI kit</title>
+<link rel="stylesheet" href="../../styles.css">
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script src="../../_ds_bundle.js"></script>
+<style>
+  html, body { margin: 0; background: var(--bg-canvas); }
+  ::-webkit-scrollbar { width: 10px; }
+  ::-webkit-scrollbar-thumb { background: var(--gray-700); border-radius: 8px; }
+  .dc-cursor { animation: dcBlink 1.1s step-end infinite; }
+  @keyframes dcBlink { 50% { opacity: 0; } }
+  @media (prefers-reduced-motion: reduce) { .dc-cursor { animation: none; } }
+</style>
+</head>
+<body>
+<div id="root"></div>
+
+<script src="data.js"></script>
+<script>
+  async function loadPartials() {
+    const files = ["icons.jsx", "Nav.jsx", "Hero.jsx", "Experience.jsx", "Skills.jsx", "About.jsx", "Contact.jsx", "Footer.jsx"];
+    for (const file of files) {
+      const res = await fetch(file);
+      const src = await res.text();
+      const code = Babel.transform(src, { presets: ["react"] }).code;
+      (0, eval)(code);
+    }
+
+    ReactDOM.createRoot(document.getElementById("root")).render(
+      React.createElement(function AppRoot() {
+        return React.createElement(
+          "div",
+          null,
+          React.createElement(window.Nav),
+          React.createElement(window.Hero),
+          React.createElement(window.Experience),
+          React.createElement(window.Skills),
+          React.createElement(window.About),
+          React.createElement(window.Contact),
+          React.createElement(window.Footer)
+        );
+      })
+    );
+  }
+  loadPartials();
+</script>
+</body>
+</html>
