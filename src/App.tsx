@@ -18,8 +18,25 @@ function App() {
   } = useGame();
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center gap-6 bg-stone-900 p-8 text-stone-100">
-      <h1 className="text-2xl font-semibold tracking-tight">ns-chess</h1>
+    <main
+      className="flex min-h-screen flex-col items-center justify-center gap-6 p-8"
+      style={{
+        backgroundColor: 'var(--bg-canvas)',
+        color: 'var(--text-primary)',
+        fontFamily: 'var(--font-body)',
+      }}
+    >
+      <h1
+        style={{
+          fontFamily: 'var(--font-heading)',
+          fontSize: 'var(--text-2xl)',
+          fontWeight: 'var(--weight-semibold)',
+          letterSpacing: 'var(--tracking-tight)',
+          color: 'var(--text-primary)',
+        }}
+      >
+        ns-chess
+      </h1>
 
       <div className="flex w-full max-w-4xl flex-col items-start gap-8 lg:flex-row lg:items-start lg:justify-center">
         <Board
