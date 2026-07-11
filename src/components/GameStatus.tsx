@@ -1,4 +1,5 @@
 import type { ChessEngine } from '../engine';
+import { Badge } from './ui/Badge';
 
 type GameStatusProps = {
   engine: ChessEngine;
@@ -26,33 +27,49 @@ function statusMessage(engine: ChessEngine, turn: 'w' | 'b'): string {
   return turn === 'w' ? 'White to move' : 'Black to move';
 }
 
-function statusTone(engine: ChessEngine): string {
+function statusTone(
+  engine: ChessEngine,
+): 'brand' | 'neutral' | 'success' | 'warning' | 'danger' {
   if (engine.isCheckmate()) {
-    return 'border-rose-500/60 bg-rose-950/50 text-rose-200';
+    return 'danger';
   }
 
   if (engine.isGameOver()) {
-    return 'border-amber-500/60 bg-amber-950/50 text-amber-200';
+    return 'warning';
   }
 
   if (engine.isCheck()) {
-    return 'border-orange-500/60 bg-orange-950/50 text-orange-200';
+    return 'warning';
   }
 
-  return 'border-stone-600 bg-stone-800/50 text-stone-200';
+  return 'brand';
 }
 
 export function GameStatus({ engine, turn }: GameStatusProps) {
   const message = statusMessage(engine, turn);
   const tone = statusTone(engine);
+  const showDot = engine.isCheck() || engine.isCheckmate();
 
   return (
     <div
-      className={`rounded border px-4 py-3 text-center text-sm font-medium ${tone}`}
       role="status"
       aria-live="polite"
+      style={{ display: 'flex', justifyContent: 'center' }}
     >
-      {message}
+      <Badge
+        tone={tone}
+        dot={showDot}
+        style={{
+          width: '100%',
+          justifyContent: 'center',
+          padding: '12px 16px',
+          fontSize: 'var(--text-sm)',
+          textTransform: 'none',
+          letterSpacing: 'var(--tracking-normal)',
+        }}
+      >
+        {message}
+      </Badge>
     </div>
   );
 }

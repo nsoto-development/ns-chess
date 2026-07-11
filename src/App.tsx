@@ -2,6 +2,7 @@ import { Board } from './components/Board';
 import { GameStatus } from './components/GameStatus';
 import { MoveList } from './components/MoveList';
 import { PromotionModal } from './components/PromotionModal';
+import { Button } from './components/ui/Button';
 import { useGame } from './hooks/useGame';
 
 // P1 vs-AI: mount Stockfish Web Worker here (see docs/features/vs-ai.md).
@@ -50,21 +51,23 @@ function App() {
           <GameStatus engine={state.engine} turn={state.turn} />
 
           <div className="flex gap-2">
-            <button
-              type="button"
-              className="flex-1 rounded border border-stone-600 bg-stone-800 px-4 py-2 text-sm font-medium transition hover:bg-stone-700 disabled:cursor-not-allowed disabled:opacity-50"
+            <Button
+              variant="secondary"
+              size="md"
               disabled={!canUndo}
               onClick={undo}
+              style={{ flex: 1 }}
             >
               Undo
-            </button>
-            <button
-              type="button"
-              className="flex-1 rounded border border-stone-600 bg-stone-800 px-4 py-2 text-sm font-medium transition hover:bg-stone-700"
+            </Button>
+            <Button
+              variant="ghost"
+              size="md"
               onClick={newGame}
+              style={{ flex: 1 }}
             >
               New game
-            </button>
+            </Button>
           </div>
 
           <MoveList state={state} />

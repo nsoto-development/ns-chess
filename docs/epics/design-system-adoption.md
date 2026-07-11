@@ -28,7 +28,7 @@ Each row = one `/nudl-start-milestone` pass and one conventional commit after ve
 | # | Milestone | Status | Deliverables |
 |---|-----------|--------|--------------|
 | DS-M1 | Foundations | Done | `index.css` imports DS `styles.css` before Tailwind; shell on `--bg-canvas`/fonts |
-| DS-M2 | Chrome | Planned | `Button`, `Dialog`, `Badge`/`Card`; TS import path via `src/components/ui/` wrappers |
+| DS-M2 | Chrome | Done | `Button`, `Dialog`, `Badge`/`Card`; TS import path via `src/components/ui/` wrappers |
 | DS-M3 | Product UI | Planned | Board/Square/Piece on DS tokens; no stone/amber palette |
 | DS-M4 | Hardening (opt) | Planned | Import convention doc; optional adherence lint |
 
@@ -38,7 +38,7 @@ Each row = one `/nudl-start-milestone` pass and one conventional commit after ve
 |-------------|----------|-------|
 | Page shell | `styles.css` + `--bg-canvas` | Replace `bg-stone-900` shell |
 | Undo / New game | `Button` | `secondary` / `ghost` |
-| Game status | `Badge` or `Tag` + `--status-*` | Pick one in DS-M2 |
+| Game status | `Badge` + `--status-*` | `brand` active turn; `warning` check/draw; `danger` checkmate |
 | Move list / PGN | `Card` + `--font-code` | Mono PGN |
 | Promotion modal | `Dialog` + `Button` | Piece picker = domain UI |
 | Board / Square / Piece | *(none)* | Token colors/rings; Unicode pieces v1 |
@@ -47,7 +47,7 @@ Each row = one `/nudl-start-milestone` pass and one conventional commit after ve
 
 - **`design-system/` read-only** — consume only; app changes in `src/`; wrap or copy into `src/components/ui/` if a primitive almost fits.
 - **CSS import order (DS-M1):** import `design-system/styles.css` **before** `@import 'tailwindcss'` in `index.css` so Tailwind utilities can override where needed.
-- **DS `.jsx` in strict TS (DS-M2):** `tsconfig.app.json` only includes `src`. Preferred: Vite alias `@ds` → `design-system/` + thin **TS wrappers** in `src/components/ui/`; alternative: `allowJs` + widen `include` only if wrappers feel too heavy.
+- **DS `.jsx` in strict TS (DS-M2):** `tsconfig.app.json` only includes `src`. **Resolved:** Vite alias `@ds` → `design-system/` + thin **TS re-export wrappers** in `src/components/ui/` (`Button`, `Dialog`, `Badge`, `Card`).
 - **Tailwind + DS:** prefer `var(--*)` and DS inline styles on domain UI; avoid parallel `@theme` unless board squares need it.
 - **Brand color:** `design-system/tokens/colors.css` is SSOT (`#0a9efa`).
 
