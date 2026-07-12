@@ -1,3 +1,4 @@
+import type { CSSProperties } from 'react';
 import type { BoardPiece } from '../engine';
 import { Piece } from './Piece';
 
@@ -20,14 +21,30 @@ export function Square({
   disabled = false,
   onClick,
 }: SquareProps) {
-  const baseColor = isLight ? 'bg-stone-300' : 'bg-stone-600';
-  const selectedClass = isSelected ? 'ring-2 ring-inset ring-amber-400' : '';
-  const disabledClass = disabled ? 'cursor-not-allowed opacity-80' : '';
+  const squareStyle: CSSProperties = {
+    backgroundColor: isLight ? 'var(--gray-700)' : 'var(--gray-900)',
+    ...(isSelected && { boxShadow: 'inset 0 0 0 2px var(--focus-ring)' }),
+    ...(disabled && { cursor: 'not-allowed', opacity: 0.8 }),
+  };
+
+  const legalTargetStyle: CSSProperties = piece
+    ? {
+        inset: 'var(--space-1)',
+        borderRadius: '9999px',
+        boxShadow: 'inset 0 0 0 4px color-mix(in srgb, var(--brand) 70%, transparent)',
+      }
+    : {
+        height: '0.75rem',
+        width: '0.75rem',
+        borderRadius: '9999px',
+        backgroundColor: 'color-mix(in srgb, var(--brand) 60%, transparent)',
+      };
 
   return (
     <button
       type="button"
-      className={`relative flex aspect-square items-center justify-center ${baseColor} ${selectedClass} ${disabledClass}`}
+      className="relative flex aspect-square items-center justify-center"
+      style={squareStyle}
       aria-label={square}
       disabled={disabled}
       onClick={onClick}
@@ -35,11 +52,8 @@ export function Square({
       {piece && <Piece type={piece.type} color={piece.color} />}
       {isLegalTarget && (
         <span
-          className={`pointer-events-none absolute ${
-            piece
-              ? 'inset-1 rounded-full ring-4 ring-amber-400/70 ring-inset'
-              : 'h-3 w-3 rounded-full bg-amber-500/60'
-          }`}
+          className="pointer-events-none absolute"
+          style={legalTargetStyle}
           aria-hidden
         />
       )}

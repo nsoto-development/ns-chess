@@ -29,7 +29,7 @@ Each row = one `/nudl-start-milestone` pass and one conventional commit after ve
 |---|-----------|--------|--------------|
 | DS-M1 | Foundations | Done | `index.css` imports DS `styles.css` before Tailwind; shell on `--bg-canvas`/fonts |
 | DS-M2 | Chrome | Done | `Button`, `Dialog`, `Badge`/`Card`; TS import path via `src/components/ui/` wrappers |
-| DS-M3 | Product UI | Planned | Board/Square/Piece on DS tokens; no stone/amber palette |
+| DS-M3 | Product UI | Done | Board/Square/Piece on DS tokens; no stone/amber palette |
 | DS-M4 | Hardening (opt) | Planned | Import convention doc; optional adherence lint |
 
 ## Integration notes
