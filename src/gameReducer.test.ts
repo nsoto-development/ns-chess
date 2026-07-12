@@ -56,7 +56,20 @@ describe('gameReducer', () => {
     expect(next.fen).not.toBe(STARTING_FEN);
     expect(next.turn).toBe('b');
     expect(next.moveHistory).toEqual(['e4']);
+    expect(next.engine.pgn()).toContain('1. e4');
     expect(next.pendingPromotion).toBeNull();
+  });
+
+  it('accumulates move history and PGN across multiple moves', () => {
+    const state = playMoves(createInitialState(), [
+      { from: 'e2', to: 'e4' },
+      { from: 'e7', to: 'e5' },
+      { from: 'g1', to: 'f3' },
+    ]);
+
+    expect(state.moveHistory).toEqual(['e4', 'e5', 'Nf3']);
+    expect(state.engine.pgn()).toContain('1. e4 e5');
+    expect(state.engine.pgn()).toContain('Nf3');
   });
 
   it('ignores an illegal MOVE_MADE', () => {
@@ -84,6 +97,21 @@ describe('gameReducer', () => {
   });
 
   it('undoes the last move', () => {
+    const state = createInitialState();
+    const afterMoves = playMoves(state, [
+      { from: 'e2', to: 'e4' },
+      { from: 'e7', to: 'e5' },
+    ]);
+    const undone = gameReducer(afterMoves, { type: 'UNDO' });
+
+    expect(undone.fen).not.toBe(STARTING_FEN);
+    expect(undone.moveHistory).toEqual(['e4']);
+    expect(undone.turn).toBe('b');
+    expect(undone.engine.pgn()).toContain('1. e4');
+    expect(undone.engine.pgn()).not.toContain('e5');
+  });
+
+  it('undoes back to the starting position', () => {
     const state = createInitialState();
     const afterMove = gameReducer(state, {
       type: 'MOVE_MADE',

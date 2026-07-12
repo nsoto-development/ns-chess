@@ -39,6 +39,24 @@ function syncFromEngine(
   };
 }
 
+function engineFromHistory(history: string[]): ChessEngine {
+  const engine = createEngine();
+
+  for (const san of history) {
+    if (!engine.moveSan(san)) {
+      throw new Error(`Invalid SAN in history: ${san}`);
+    }
+  }
+
+  return engine;
+}
+
+function engineForMove(state: GameState): ChessEngine {
+  return state.moveHistory.length === 0
+    ? createEngine(state.fen)
+    : engineFromHistory(state.moveHistory);
+}
+
 export function createInitialState(): GameState {
   return syncFromEngine(createEngine());
 }
@@ -59,7 +77,7 @@ export function gameReducer(state: GameState, action: GameAction): GameState {
     }
 
     case 'MOVE_MADE': {
-      const engine = createEngine(state.fen);
+      const engine = engineForMove(state);
       const result = engine.move(action.move);
       if (!result) {
         return state;
@@ -77,17 +95,7 @@ export function gameReducer(state: GameState, action: GameAction): GameState {
         return state;
       }
 
-      const pgn = state.engine.pgn();
-      const engine = createEngine();
-      if (!pgn || !engine.loadPgn(pgn)) {
-        return state;
-      }
-
-      const undone = engine.undo();
-      if (!undone) {
-        return state;
-      }
-
+      const engine = engineFromHistory(state.moveHistory.slice(0, -1));
       return syncFromEngine(engine, state.mode);
     }
   }
