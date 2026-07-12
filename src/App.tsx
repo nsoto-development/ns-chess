@@ -1,3 +1,4 @@
+import { AppHeader } from './components/AppHeader';
 import { Board } from './components/Board';
 import { GameStatus } from './components/GameStatus';
 import { MoveList } from './components/MoveList';
@@ -27,19 +28,9 @@ function App() {
         fontFamily: 'var(--font-body)',
       }}
     >
-      <h1
-        style={{
-          fontFamily: 'var(--font-heading)',
-          fontSize: 'var(--text-2xl)',
-          fontWeight: 'var(--weight-semibold)',
-          letterSpacing: 'var(--tracking-tight)',
-          color: 'var(--text-primary)',
-        }}
-      >
-        ns-chess
-      </h1>
+      <AppHeader />
 
-      <div className="flex w-full max-w-4xl flex-col items-start gap-8 lg:flex-row lg:items-start lg:justify-center">
+      <div className="flex w-full max-w-4xl flex-col items-center gap-8 lg:flex-row lg:items-start lg:justify-center">
         <Board
           state={state}
           disabled={!isInteractive}
