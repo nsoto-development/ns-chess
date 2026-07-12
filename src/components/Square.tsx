@@ -49,7 +49,9 @@ export function Square({
       disabled={disabled}
       onClick={onClick}
     >
-      {piece && <Piece type={piece.type} color={piece.color} />}
+      {piece && (
+        <Piece type={piece.type} color={piece.color} squareTone={isLight ? 'light' : 'dark'} />
+      )}
       {isLegalTarget && (
         <span
           className="pointer-events-none absolute"
