@@ -56,7 +56,7 @@ Add new DS primitives by creating a thin wrapper under `src/components/ui/` firs
 | Game status | `Badge` + `--status-*` | `brand` active turn; `warning` check/draw; `danger` checkmate |
 | Move list / PGN | `Card` + `--font-code` | Mono PGN |
 | Promotion modal | `Dialog` + `Button` | Piece picker stays domain UI |
-| Board / Square / Piece | *(tokens only)* | Square colors, rings, Unicode pieces |
+| Board / Square / Piece | *(tokens only)* | Square colors, rings; Cburnett SVGs via `Piece.tsx` |
 
 ## Smoke checklist
 
@@ -67,7 +67,7 @@ Manual pass after DS-touching changes (`npm test`, `npm run build`, `npm run lin
 - [ ] **Controls** — Undo / New game use DS button chrome; disabled Undo looks inactive.
 - [ ] **Status** — Badge reflects turn, check, checkmate, stalemate/draw with expected variant colors.
 - [ ] **Move list** — Card border/background; PGN in mono (`--font-code`).
-- [ ] **Board** — Light/dark squares use gray tokens; selection ring uses `--focus-ring`; legal targets show brand tint.
+- [ ] **Board** — Light/dark squares use gray tokens; selection ring uses `--focus-ring`; legal targets show brand tint; Cburnett pieces crisp at 1x/2x.
 - [ ] **Promotion** — Dialog opens on pawn promotion; piece choices dismiss modal and complete move.
 - [ ] **Playthrough** — Full game: moves, capture, castle, en passant if exercised, undo, new game reset.
 - [ ] **No regressions** — No `stone-*` / `amber-*` on public surfaces; no raw `design-system` imports outside `ui/` wrappers.

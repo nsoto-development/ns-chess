@@ -44,7 +44,7 @@ Lasting conventions and smoke checklist: [`docs/design/system-integration.md`](.
 | Game status | `Badge` + `--status-*` | `brand` active turn; `warning` check/draw; `danger` checkmate |
 | Move list / PGN | `Card` + `--font-code` | Mono PGN |
 | Promotion modal | `Dialog` + `Button` | Piece picker = domain UI |
-| Board / Square / Piece | *(none)* | Token colors/rings; Unicode pieces v1 |
+| Board / Square / Piece | *(none)* | Token colors/rings; Unicode pieces v1 (interim — superseded by [local-2-player M4](../features/local-2-player.md)) |
 
 ### Technical decisions
 

@@ -1,22 +1,5 @@
+import { pieceSvgUrl } from '../assets/pieces';
 import type { Color } from '../types';
-
-const WHITE_GLYPHS: Record<string, string> = {
-  k: '♔',
-  q: '♕',
-  r: '♖',
-  b: '♗',
-  n: '♘',
-  p: '♙',
-};
-
-const BLACK_GLYPHS: Record<string, string> = {
-  k: '♚',
-  q: '♛',
-  r: '♜',
-  b: '♝',
-  n: '♞',
-  p: '♟',
-};
 
 const PIECE_NAMES: Record<string, string> = {
   k: 'king',
@@ -33,25 +16,26 @@ type PieceProps = {
 };
 
 export function Piece({ type, color }: PieceProps) {
-  const glyphs = color === 'w' ? WHITE_GLYPHS : BLACK_GLYPHS;
-  const glyph = glyphs[type] ?? '?';
+  const src = pieceSvgUrl(color, type);
   const name = PIECE_NAMES[type] ?? 'piece';
   const isWhite = color === 'w';
+  const label = `${isWhite ? 'white' : 'black'} ${name}`;
+
+  if (!src) {
+    return (
+      <span
+        className="pointer-events-none block select-none text-center leading-none"
+        style={{ fontSize: 'var(--text-xs)', color: 'var(--text-tertiary)' }}
+        aria-label={label}
+      >
+        ?
+      </span>
+    );
+  }
 
   return (
-    <span
-      className="pointer-events-none block select-none leading-none"
-      style={{
-        fontSize: '2.25rem',
-        lineHeight: 'var(--leading-tight)',
-        color: isWhite ? 'var(--white)' : 'var(--gray-950)',
-        textShadow: isWhite
-          ? '0 1px 2px rgba(0, 0, 0, 0.85)'
-          : '0 0 3px rgba(247, 250, 251, 0.4)',
-      }}
-      aria-label={`${isWhite ? 'white' : 'black'} ${name}`}
-    >
-      {glyph}
+    <span className="pointer-events-none flex h-[85%] w-[85%] select-none items-center justify-center" role="img" aria-label={label}>
+      <img src={src} alt="" className="h-full w-full object-contain" draggable={false} />
     </span>
   );
 }
