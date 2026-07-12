@@ -23,7 +23,7 @@ Rule logic lives in a thin [`chess.js`](https://github.com/jhlywa/chess.js) wrap
 
 ### Shipped — M2
 
-- `src/components/Board.tsx`, `Square.tsx`, `Piece.tsx` — click-to-move, legal-move highlighting, Unicode pieces
+- `src/components/Board.tsx`, `Square.tsx`, `Piece.tsx` — click-to-move, legal-move highlighting, Cburnett SVG pieces
 - Wired into `App.tsx`; white on bottom
 - `MOVE_MADE` uses a fresh engine from FEN (pure reducer; React Strict Mode safe)
 
@@ -35,6 +35,11 @@ Rule logic lives in a thin [`chess.js`](https://github.com/jhlywa/chess.js) wrap
 - Undo and new game (`UNDO`, `PROMOTION_PENDING` reducer actions)
 - Sidebar layout in `App.tsx`; board disabled when game over or promotion pending
 - Reducer edge-case tests (undo, promotion, checkmate, stalemate, castling, en passant)
+
+### Shipped — M4
+
+- Cburnett SVG chess pieces (`src/assets/pieces/`); `Piece.tsx` image render at 85% square
+- CC BY-SA attribution in `src/assets/pieces/ATTRIBUTION.md`
 
 ### Later
 
@@ -95,6 +100,10 @@ npm run build   # production build
 | [`docs/mvp-scope.md`](docs/mvp-scope.md) | v1 launch bar and non-goals |
 | [`docs/roadmap.md`](docs/roadmap.md) | Priority tiers and work items |
 | [`docs/features/`](docs/features/) | Feature specs |
+
+## Credits
+
+Chess piece SVGs: **Cburnett** set by Colin M. L. Burnett ([CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/)). See [`src/assets/pieces/ATTRIBUTION.md`](src/assets/pieces/ATTRIBUTION.md).
 
 ## License
 

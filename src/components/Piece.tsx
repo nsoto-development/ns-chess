@@ -1,22 +1,8 @@
+import { pieceSvgUrl } from '../assets/pieces';
 import type { Color } from '../types';
 
-const WHITE_GLYPHS: Record<string, string> = {
-  k: '♔',
-  q: '♕',
-  r: '♖',
-  b: '♗',
-  n: '♘',
-  p: '♙',
-};
-
-const BLACK_GLYPHS: Record<string, string> = {
-  k: '♚',
-  q: '♛',
-  r: '♜',
-  b: '♝',
-  n: '♞',
-  p: '♟',
-};
+/** Muted edge accent for black pieces — softer than original #ececec highlights. */
+const PIECE_ACCENT = '#9aa8af';
 
 const PIECE_NAMES: Record<string, string> = {
   k: 'king',
@@ -30,28 +16,51 @@ const PIECE_NAMES: Record<string, string> = {
 type PieceProps = {
   type: string;
   color: Color;
+  /** Board square tone — improves black-piece contrast on dark squares. */
+  squareTone?: 'light' | 'dark';
 };
 
-export function Piece({ type, color }: PieceProps) {
-  const glyphs = color === 'w' ? WHITE_GLYPHS : BLACK_GLYPHS;
-  const glyph = glyphs[type] ?? '?';
+function pieceImageFilter(color: Color, squareTone?: 'light' | 'dark'): string {
+  if (color === 'w') {
+    return 'drop-shadow(0 1px 2px rgba(0, 0, 0, 0.65))';
+  }
+
+  const edge = `drop-shadow(0 0 0.45px ${PIECE_ACCENT})`;
+
+  if (squareTone === 'dark') {
+    return `brightness(1.12) contrast(1.04) ${edge}`;
+  }
+
+  return edge;
+}
+
+export function Piece({ type, color, squareTone }: PieceProps) {
+  const src = pieceSvgUrl(color, type);
   const name = PIECE_NAMES[type] ?? 'piece';
   const isWhite = color === 'w';
+  const label = `${isWhite ? 'white' : 'black'} ${name}`;
+
+  if (!src) {
+    return (
+      <span
+        className="pointer-events-none block select-none text-center leading-none"
+        style={{ fontSize: 'var(--text-xs)', color: 'var(--text-tertiary)' }}
+        aria-label={label}
+      >
+        ?
+      </span>
+    );
+  }
 
   return (
-    <span
-      className="pointer-events-none block select-none leading-none"
-      style={{
-        fontSize: '2.25rem',
-        lineHeight: 'var(--leading-tight)',
-        color: isWhite ? 'var(--white)' : 'var(--gray-950)',
-        textShadow: isWhite
-          ? '0 1px 2px rgba(0, 0, 0, 0.85)'
-          : '0 0 3px rgba(247, 250, 251, 0.4)',
-      }}
-      aria-label={`${isWhite ? 'white' : 'black'} ${name}`}
-    >
-      {glyph}
+    <span className="pointer-events-none flex h-[85%] w-[85%] select-none items-center justify-center" role="img" aria-label={label}>
+      <img
+        src={src}
+        alt=""
+        className="h-full w-full object-contain"
+        style={{ filter: pieceImageFilter(color, squareTone) }}
+        draggable={false}
+      />
     </span>
   );
 }
