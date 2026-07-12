@@ -39,6 +39,7 @@ Lasting conventions and smoke checklist: [`docs/design/system-integration.md`](.
 | App surface | DS piece | Notes |
 |-------------|----------|-------|
 | Page shell | `styles.css` + `--bg-canvas` | Replace `bg-stone-900` shell |
+| Title chrome | `nsoto-mark-cyan.png` + tokens | `AppHeader` / `BrandLink`; links to nsoto.dev + GitHub repo |
 | Undo / New game | `Button` | `secondary` / `ghost` |
 | Game status | `Badge` + `--status-*` | `brand` active turn; `warning` check/draw; `danger` checkmate |
 | Move list / PGN | `Card` + `--font-code` | Mono PGN |
@@ -64,8 +65,9 @@ Lasting conventions and smoke checklist: [`docs/design/system-integration.md`](.
 | Area | Notes |
 |------|--------|
 | `src/index.css` | DS `styles.css` import order |
-| `src/App.tsx` | Page shell |
-| `src/components/` | Board, Square, Piece, GameStatus, MoveList, PromotionModal |
+| `src/App.tsx` | Page shell; centered mobile game layout |
+| `src/components/` | Board, Square, Piece, GameStatus, MoveList, PromotionModal, AppHeader, BrandLink |
+| `src/components/ui/` | DS wrappers + `brandAssets.ts` (logo URLs via `@ds`) |
 | `design-system/` | Vendored kit — **read-only** |
 
 ## Lifecycle
