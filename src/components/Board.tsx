@@ -86,7 +86,14 @@ export function Board({ state, disabled = false, onMove, onPromotionRequest }: B
   );
 
   return (
-    <div className="grid w-full max-w-lg grid-cols-8 border-4 border-stone-700">
+    <div
+      className="grid w-full max-w-lg grid-cols-8"
+      style={{
+        borderWidth: 4,
+        borderStyle: 'solid',
+        borderColor: 'var(--gray-700)',
+      }}
+    >
       {Array.from({ length: 8 }, (_, displayRank) => 7 - displayRank).flatMap(
         (rank) =>
           Array.from({ length: 8 }, (_, file) => {

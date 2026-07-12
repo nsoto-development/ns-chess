@@ -1,7 +1,9 @@
+import { AppHeader } from './components/AppHeader';
 import { Board } from './components/Board';
 import { GameStatus } from './components/GameStatus';
 import { MoveList } from './components/MoveList';
 import { PromotionModal } from './components/PromotionModal';
+import { Button } from './components/ui/Button';
 import { useGame } from './hooks/useGame';
 
 // P1 vs-AI: mount Stockfish Web Worker here (see docs/features/vs-ai.md).
@@ -18,10 +20,17 @@ function App() {
   } = useGame();
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center gap-6 bg-stone-900 p-8 text-stone-100">
-      <h1 className="text-2xl font-semibold tracking-tight">ns-chess</h1>
+    <main
+      className="flex min-h-screen flex-col items-center justify-center gap-6 p-8"
+      style={{
+        backgroundColor: 'var(--bg-canvas)',
+        color: 'var(--text-primary)',
+        fontFamily: 'var(--font-body)',
+      }}
+    >
+      <AppHeader />
 
-      <div className="flex w-full max-w-4xl flex-col items-start gap-8 lg:flex-row lg:items-start lg:justify-center">
+      <div className="flex w-full max-w-4xl flex-col items-center gap-8 lg:flex-row lg:items-start lg:justify-center">
         <Board
           state={state}
           disabled={!isInteractive}
@@ -33,21 +42,23 @@ function App() {
           <GameStatus engine={state.engine} turn={state.turn} />
 
           <div className="flex gap-2">
-            <button
-              type="button"
-              className="flex-1 rounded border border-stone-600 bg-stone-800 px-4 py-2 text-sm font-medium transition hover:bg-stone-700 disabled:cursor-not-allowed disabled:opacity-50"
+            <Button
+              variant="secondary"
+              size="md"
               disabled={!canUndo}
               onClick={undo}
+              style={{ flex: 1 }}
             >
               Undo
-            </button>
-            <button
-              type="button"
-              className="flex-1 rounded border border-stone-600 bg-stone-800 px-4 py-2 text-sm font-medium transition hover:bg-stone-700"
+            </Button>
+            <Button
+              variant="ghost"
+              size="md"
               onClick={newGame}
+              style={{ flex: 1 }}
             >
               New game
-            </button>
+            </Button>
           </div>
 
           <MoveList state={state} />

@@ -1,0 +1,84 @@
+/* ============================================================
+   nsoto.dev — color tokens
+   Dark-only surface system built around a cyan brand accent,
+   sampled from the "coming soon" cyan lockup (assets/logo/nsoto-logo-cyan.png).
+   ============================================================ */
+
+:root {
+  /* ---- base neutrals (true-black ground, matches logo bg) ---- */
+  --black: #000000;
+  --gray-950: #0a0d10;
+  --gray-900: #0f1316;
+  --gray-850: #14181c;
+  --gray-800: #1b2126;
+  --gray-700: #262e34;
+  --gray-600: #3a444b;
+  --gray-500: #56636b;
+  --gray-400: #7c8a92;
+  --gray-300: #a6b3ba;
+  --gray-200: #ccd5d9;
+  --gray-100: #e6ebed;
+  --white: #f7fafb;
+
+  /* ---- brand azure scale — re-sampled directly from the cyan logo
+     lockup's gradient (hue ~203°); despite the "cyan" filename it reads
+     as a vivid azure/sky blue, not teal-cyan — tokens match that reality. ---- */
+  --cyan-900: #012c46;
+  --cyan-800: #023e64;
+  --cyan-700: #035487;
+  --cyan-600: #046daf;
+  --cyan-500: #0486d7;
+  --cyan-400: #0a9efa;
+  --cyan-300: #50bafb;
+  --cyan-200: #91d3fd;
+  --cyan-100: #cdebfe;
+
+  /* ---- secondary accent: violet (gradient partner in the PRIMARY purple/blue
+     lockup — used sparingly, e.g. hero glow, never as a second UI color) ---- */
+  --violet-500: #8b5cf6;
+  --violet-400: #a78bfa;
+
+  /* ---- status ---- */
+  --green-500: #22c55e;
+  --amber-500: #f59e0b;
+  --red-500: #ef4444;
+
+  /* ============================================================
+     Semantic aliases — reference these, not the raw scale, in UI
+     ============================================================ */
+
+  --bg-canvas: var(--black);
+  --bg-surface: var(--gray-950);
+  --bg-surface-raised: var(--gray-900);
+  --bg-surface-hover: var(--gray-850);
+  --bg-inset: #060809;
+
+  --border-subtle: rgba(247, 250, 251, 0.08);
+  --border-default: rgba(247, 250, 251, 0.14);
+  --border-strong: rgba(247, 250, 251, 0.24);
+  --border-brand: rgba(10, 158, 250, 0.5);
+
+  --text-primary: var(--white);
+  --text-secondary: var(--gray-300);
+  --text-tertiary: var(--gray-500);
+  --text-disabled: var(--gray-600);
+  --text-on-brand: #00161a;
+
+  --brand: var(--cyan-400);
+  --brand-strong: var(--cyan-300);
+  --brand-dim: var(--cyan-600);
+  --brand-wash: rgba(10, 158, 250, 0.1);
+  --brand-wash-strong: rgba(10, 158, 250, 0.18);
+
+  --link: var(--cyan-300);
+  --link-hover: var(--cyan-200);
+
+  --focus-ring: var(--cyan-400);
+
+  --status-success: var(--green-500);
+  --status-warning: var(--amber-500);
+  --status-danger: var(--red-500);
+
+  --gradient-brand: linear-gradient(135deg, var(--cyan-300) 0%, var(--violet-500) 100%); /* @kind other */
+  --gradient-brand-subtle: linear-gradient(135deg, rgba(10,158,250,0.16) 0%, rgba(139,92,246,0.10) 100%); /* @kind other */
+}

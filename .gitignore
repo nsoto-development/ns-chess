@@ -61,6 +61,7 @@ Desktop.ini
 *~
 
 # AI assistants & local dev workflow (nudl is private — not for public repo)
+*_template.md
 .cursor/
 .cursorignore
 .claude/
@@ -68,7 +69,6 @@ AGENTS.md
 CLAUDE.md
 docs/process/
 docs/how-to-use.md
-docs/features/_template.md
 
 # Local tooling
 .cache/

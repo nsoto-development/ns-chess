@@ -1,0 +1,9 @@
+/* ============================================================
+   nsoto.dev — webfonts
+   SUBSTITUTION FLAG: no brand font files were supplied with the
+   logo pack. These are nearest Google Fonts matches to the
+   logo's geometric mono wordmark — swap the @import + var()
+   refs in typography.css if real brand fonts are provided.
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700;800&display=swap');
