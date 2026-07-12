@@ -31,12 +31,24 @@ function App() {
       <AppHeader />
 
       <div className="flex w-full max-w-4xl flex-col items-center gap-8 lg:flex-row lg:items-start lg:justify-center">
-        <Board
-          state={state}
-          disabled={!isInteractive}
-          onMove={makeMove}
-          onPromotionRequest={requestPromotion}
-        />
+        <section
+          className="flex w-full max-w-lg flex-col items-center gap-2"
+          aria-describedby="board-move-hint"
+        >
+          <Board
+            state={state}
+            disabled={!isInteractive}
+            onMove={makeMove}
+            onPromotionRequest={requestPromotion}
+          />
+          <p
+            id="board-move-hint"
+            className="m-0 max-w-lg text-center text-[length:var(--text-xs)] leading-snug text-[var(--text-tertiary)]"
+          >
+            Click a piece, then a highlighted square to move. Drag-and-drop is not
+            supported.
+          </p>
+        </section>
 
         <aside className="flex w-full min-w-0 max-w-md flex-col gap-4 lg:w-80">
           <GameStatus engine={state.engine} turn={state.turn} />

@@ -1,4 +1,5 @@
 import type { GameState } from '../gameReducer';
+import { pgnFromHistory } from '../engine';
 import { Card } from './ui/Card';
 
 type MoveListProps = {
@@ -27,7 +28,7 @@ const sectionHeadingStyle = {
 
 export function MoveList({ state }: MoveListProps) {
   const rows = formatMovePairs(state.moveHistory);
-  const pgn = state.engine.pgn();
+  const pgn = pgnFromHistory(state.moveHistory);
 
   return (
     <section className="flex min-h-0 flex-1 flex-col gap-3">

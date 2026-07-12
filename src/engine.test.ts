@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { createEngine } from './engine';
+import { createEngine, pgnFromHistory } from './engine';
 
 const STARTING_FEN =
   'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1';
@@ -106,5 +106,35 @@ describe('createEngine', () => {
     engine.move({ from: 'e7', to: 'e5' });
 
     expect(engine.pgn()).toContain('1. e4 e5');
+  });
+
+  it('builds pgn from san history', () => {
+    const playedAt = new Date(2026, 6, 12);
+
+    expect(pgnFromHistory([])).toBe('');
+    expect(pgnFromHistory(['e4', 'e5', 'Nf3'], playedAt)).toContain('1. e4 e5');
+    expect(pgnFromHistory(['e4', 'e5', 'Nf3'], playedAt)).toContain('Nf3');
+  });
+
+  it('sets readable pgn headers instead of question marks', () => {
+    const pgn = pgnFromHistory(['d4', 'e5', 'dxe5'], new Date(2026, 6, 12));
+
+    expect(pgn).toContain('[White "White"]');
+    expect(pgn).toContain('[Black "Black"]');
+    expect(pgn).toContain('[Date "2026.07.12"]');
+    expect(pgn).toContain('[Event "Casual game"]');
+    expect(pgn).toContain('[Site "ns-chess"]');
+    expect(pgn).not.toContain('"?"');
+    expect(pgn).toContain('1. d4 e5 2. dxe5');
+  });
+
+  it('sets checkmate result in pgn headers', () => {
+    const pgn = pgnFromHistory(
+      ['f3', 'e5', 'g4', 'Qh4'],
+      new Date(2026, 6, 12),
+    );
+
+    expect(pgn).toContain('[Result "0-1"]');
+    expect(pgn).not.toContain('[Result "1-0"]');
   });
 });
