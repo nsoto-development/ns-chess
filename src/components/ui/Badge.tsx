@@ -1,6 +1,6 @@
 import type { CSSProperties } from 'react';
-import { Badge as DSBadge } from '@ds/components/core/Badge.jsx';
-import type { BadgeProps as DSBadgeProps } from '@ds/components/core/Badge';
+import { Badge as DSBadge } from '@nsoto/portfolio-ui';
+import type { BadgeProps as DSBadgeProps } from '@nsoto/portfolio-ui';
 
 export type BadgeProps = DSBadgeProps & {
   style?: CSSProperties;

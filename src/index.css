@@ -1,2 +1,2 @@
-@import '../design-system/styles.css';
+@import '@nsoto/portfolio-tokens/styles.css';
 @import 'tailwindcss';

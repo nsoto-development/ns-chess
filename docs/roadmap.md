@@ -8,7 +8,7 @@ Ordered **backlog**: **priority tiers** (P0/P1/P2) group **numbered work items**
 
 ## Status (where we are)
 
-- **Last shipped:** M4 — Cburnett SVG chess pieces (P1 #4)
+- **Last shipped:** P1 #5 — design-system package cutover (`@nsoto/portfolio-*`)
 - **Current focus:** P1 backlog (vs-AI, drag-and-drop)
 - **Pre-launch / MVP:** see `[mvp-scope.md](mvp-scope.md)`
 
@@ -60,10 +60,11 @@ Full SSOT for behavior, code paths, and tests: `[docs/features/local-2-player.md
 
 ## P1
 
-1. `[chore]` **Design system adoption** — nsoto.dev DS wired into public UI (see [epics/design-system-adoption.md](epics/design-system-adoption.md)) — **Done** (DS-M4)
+1. `[chore]` **Design system adoption** — nsoto.dev DS wired into public UI — **Done** (DS-M4)
 2. `[feature]` **Vs-AI** — Stockfish Web Worker, UCI layer, difficulty levels, thinking state (P1; see `[features/vs-ai.md](features/vs-ai.md)`)
 3. `[feature]` **Drag-and-drop moves** — UX polish layered on click-to-move (non-goal for MVP)
 4. `[chore]` **Chess piece SVGs** — replace Unicode v1 with vendored [Cburnett](https://commons.wikimedia.org/wiki/Category:SVG_chess_pieces) set; `Piece.tsx` + board/promotion sizing; attribution (see [local-2-player.md](features/local-2-player.md) M4) — **Done** (M4)
+5. `[debt]` **Design-system package cutover** — remove vendored `design-system/`; consume `@nsoto/portfolio-tokens` + `@nsoto/portfolio-ui` (see [design/system-integration.md](design/system-integration.md)) — **Done**
 
 ---
 

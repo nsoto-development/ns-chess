@@ -11,6 +11,8 @@
     "lint": "oxlint"
   },
   "dependencies": {
+    "@nsoto/portfolio-tokens": "^0.1.0",
+    "@nsoto/portfolio-ui": "^0.1.0",
     "chess.js": "^1.4.0",
     "react": "^19.1.0",
     "react-dom": "^19.1.0"
