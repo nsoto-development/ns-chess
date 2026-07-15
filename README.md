@@ -104,11 +104,11 @@ npm run build   # production build
 
 ## Releases
 
-Ship product work through **`feature/`** or **`docs/`** PRs into `main` as usual. For a tagged GitHub release:
+Ship work through a PR into `main` (branch prefix from work-item kind — see [`docs/process/cursor-workflow.md`](docs/process/cursor-workflow.md) §2.2). For a tagged GitHub release:
 
-1. Open a **`chore/release-vX.Y.Z`** PR that bumps `"version"` in [`package.json`](package.json) (and README status/links if they should match).
+1. Open a PR that bumps `"version"` in [`package.json`](package.json) (and README status/links if they should match). Prefer a `[chore]` branch such as `chore/release-vX.Y.Z`.
 2. Merge that PR to `main`.
-3. Create the GitHub release / tag (`vX.Y.Z`) from the merge commit on `main` — release notes should cite the PRs that make up the ship.
+3. Create the GitHub release / tag (`vX.Y.Z`) from the merge commit on `main` — release notes should cite the product PRs that make up the ship.
 
 Do **not** push version bumps or tags straight to `main` outside that PR path.
 
