@@ -100,6 +100,17 @@ npm run build   # production build
 | [`docs/mvp-scope.md`](docs/mvp-scope.md) | v1 launch bar and non-goals |
 | [`docs/roadmap.md`](docs/roadmap.md) | Priority tiers and work items |
 | [`docs/features/`](docs/features/) | Feature specs |
+| [Releases](https://github.com/nsoto-development/ns-chess/releases) | Versioned tags (e.g. [v0.1.0](https://github.com/nsoto-development/ns-chess/releases/tag/v0.1.0)) |
+
+## Releases
+
+Ship product work through **`feature/`** or **`docs/`** PRs into `main` as usual. For a tagged GitHub release:
+
+1. Open a **`chore/release-vX.Y.Z`** PR that bumps `"version"` in [`package.json`](package.json) (and README status/links if they should match).
+2. Merge that PR to `main`.
+3. Create the GitHub release / tag (`vX.Y.Z`) from the merge commit on `main` — release notes should cite the PRs that make up the ship.
+
+Do **not** push version bumps or tags straight to `main` outside that PR path.
 
 ## Credits
 
