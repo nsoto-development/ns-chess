@@ -4,6 +4,8 @@ Cross-cutting notes for consuming the vendored **nsoto.dev** kit at [`design-sys
 
 Token and component SSOT: [`design-system/readme.md`](../../design-system/readme.md).
 
+**Migration (target):** leave vendoring for `@nsoto/portfolio-tokens` + `@nsoto/portfolio-ui`. Execution SSOT lives in the canonical design-system repo: `guidelines/migration-to-portfolio-packages.md` (Phase B = this app). Until that lands, conventions below still apply.
+
 ## Import conventions
 
 ### Global styles
