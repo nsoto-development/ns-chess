@@ -1,2 +1,2 @@
-export { Card } from '@ds/components/core/Card.jsx';
-export type { CardProps } from '@ds/components/core/Card';
+export { Card } from '@nsoto/portfolio-ui';
+export type { CardProps } from '@nsoto/portfolio-ui';

@@ -1,3 +1,3 @@
-import nsotoMarkCyan from '@ds/assets/logo/nsoto-mark-cyan.png';
+import nsotoMarkCyan from '@nsoto/portfolio-tokens/assets/logo/nsoto-mark-cyan.png';
 
 export { nsotoMarkCyan };

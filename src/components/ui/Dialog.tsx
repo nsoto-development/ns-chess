@@ -1,2 +1,2 @@
-export { Dialog } from '@ds/components/feedback/Dialog.jsx';
-export type { DialogProps } from '@ds/components/feedback/Dialog';
+export { Dialog } from '@nsoto/portfolio-ui';
+export type { DialogProps } from '@nsoto/portfolio-ui';

@@ -42,7 +42,8 @@ Tracks **[feature] work items P0 #2 and P0 #3** on [`docs/roadmap.md`](../roadma
 | **Render** | `Piece.tsx` only — `Square` and `PromotionModal` keep existing props |
 | **Sizing** | ~85% of square cell; verify board + promotion modal at mobile width |
 
-**M4 non-goals:** drag ghosts, user-selectable sets, AI-generated art, edits under `design-system/`.
+**M4 non-goals:** drag ghosts, user-selectable sets, AI-generated art.
+
 
 **Future hook:** swap asset directory or `Piece` implementation for a custom stroke set without touching board interaction code.
 

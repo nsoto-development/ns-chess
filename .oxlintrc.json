@@ -4,19 +4,22 @@
   "env": {
     "browser": true
   },
-  "ignorePatterns": ["design-system/**", "dist/**", "node_modules/**"],
+  "ignorePatterns": ["dist/**", "node_modules/**"],
   "rules": {
     "no-restricted-imports": [
       "error",
       {
         "patterns": [
           {
-            "group": ["@ds", "@ds/**"],
-            "message": "Import DS kit only from src/components/ui/ wrappers (see docs/design/system-integration.md)."
+            "group": ["@nsoto/portfolio-ui", "@nsoto/portfolio-ui/**"],
+            "message": "Import UI kit only from src/components/ui/ wrappers (see docs/design/system-integration.md)."
           },
           {
-            "group": ["**/design-system/**"],
-            "message": "Do not import design-system/ directly — use src/components/ui/ wrappers."
+            "group": [
+              "@nsoto/portfolio-tokens",
+              "@nsoto/portfolio-tokens/**"
+            ],
+            "message": "Import tokens/assets only from src/components/ui/ wrappers or src/index.css (see docs/design/system-integration.md)."
           }
         ]
       }

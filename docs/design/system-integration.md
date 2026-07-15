@@ -1,42 +1,38 @@
 # Design system integration — ns-chess
 
-Cross-cutting notes for consuming the vendored **nsoto.dev** kit at [`design-system/`](../../design-system/). The kit is **read-only** in this repo; see [`.cursor/rules/design-system-readonly.mdc`](../../.cursor/rules/design-system-readonly.mdc).
+Cross-cutting notes for consuming the published **nsoto.dev** packages:
 
-Token and component SSOT: [`design-system/readme.md`](../../design-system/readme.md).
+- [`@nsoto/portfolio-tokens`](https://www.npmjs.com/package/@nsoto/portfolio-tokens) — CSS foundations + brand assets
+- [`@nsoto/portfolio-ui`](https://www.npmjs.com/package/@nsoto/portfolio-ui) — React UI primitives
 
-**Migration (target):** leave vendoring for `@nsoto/portfolio-tokens` + `@nsoto/portfolio-ui`. Execution SSOT lives in the canonical design-system repo: `guidelines/migration-to-portfolio-packages.md` (Phase B = this app). Until that lands, conventions below still apply.
+Execution history (Phase B cutover): canonical design-system repo `guidelines/migration-to-portfolio-packages.md`.
 
 ## Import conventions
 
 ### Global styles
 
-Import DS foundations **before** Tailwind so utilities can override where needed:
+Import token foundations **before** Tailwind so utilities can override where needed:
 
 ```css
-@import '../design-system/styles.css';
+@import '@nsoto/portfolio-tokens/styles.css';
 @import 'tailwindcss';
 ```
 
 (`src/index.css` — do not reorder without a visual regression pass.)
 
-### Vite alias
-
-[`vite.config.ts`](../../vite.config.ts) maps `@ds` → `design-system/`. Use **`@ds` only inside `src/components/ui/`** — never in feature components, hooks, or tests.
-
 ### Component wrappers
 
 | Layer | Imports from | Example |
 |-------|----------------|---------|
-| `src/components/ui/*` | `@ds/components/...` or `@ds/assets/...` | `Button.tsx` wraps DS `.jsx`; `brandAssets.ts` exports logo URLs |
+| `src/components/ui/*` | `@nsoto/portfolio-ui` or `@nsoto/portfolio-tokens/assets/...` | `Button.tsx` wraps package exports; `brandAssets.ts` exports logo URLs |
 | Everything else in `src/` | `./ui/*` or `../ui/*` | `App.tsx` → `./components/ui/Button` |
 
 Add new DS primitives by creating a thin wrapper under `src/components/ui/` first, then import the wrapper from domain code.
 
 **Do not:**
 
-- Import `design-system/` via relative paths from `src/` (except the CSS entry in `index.css`).
-- Import `@ds/*` outside `src/components/ui/`.
-- Edit files under `design-system/` from adoption or feature work (kit-maintenance threads only).
+- Import `@nsoto/portfolio-ui` or `@nsoto/portfolio-tokens` outside `src/components/ui/` (except the CSS entry in `index.css`).
+- Edit published package sources from this app — bump the dependency when the kit changes.
 
 ### Styling domain UI
 
@@ -46,7 +42,7 @@ Add new DS primitives by creating a thin wrapper under `src/components/ui/` firs
 
 ### Enforcement
 
-`npm run lint` runs [oxlint](https://oxc.rs/docs/guide/usage/linter.html) with `no-restricted-imports` — DS paths are allowed only in `src/components/ui/**`.
+`npm run lint` runs [oxlint](https://oxc.rs/docs/guide/usage/linter.html) with `no-restricted-imports` — package imports are allowed only in `src/components/ui/**`.
 
 ## Surface map
 
@@ -72,4 +68,4 @@ Manual pass after DS-touching changes (`npm test`, `npm run build`, `npm run lin
 - [ ] **Board** — Light/dark squares use gray tokens; selection ring uses `--focus-ring`; legal targets show brand tint; Cburnett pieces crisp at 1x/2x.
 - [ ] **Promotion** — Dialog opens on pawn promotion; piece choices dismiss modal and complete move.
 - [ ] **Playthrough** — Full game: moves, capture, castle, en passant if exercised, undo, new game reset.
-- [ ] **No regressions** — No `stone-*` / `amber-*` on public surfaces; no raw `design-system` imports outside `ui/` wrappers.
+- [ ] **No regressions** — No `stone-*` / `amber-*` on public surfaces; no raw `@nsoto/*` imports outside `ui/` wrappers / `index.css`.
