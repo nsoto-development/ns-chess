@@ -26,9 +26,10 @@ Tracks **[feature] work items P0 #2 and P0 #3** on [`docs/roadmap.md`](../roadma
 ## Non-goals (v1)
 
 - Vs-AI / Stockfish (P1 — see [`vs-ai.md`](vs-ai.md))
-- Drag-and-drop (P1 polish — click-to-move is the v1 interaction model)
 - Deploy, online play, clocks, puzzles, FEN import UI, persistence
 - Custom brand-aligned stroke piece art, multiple themes, piece animations (optional P2 polish)
+
+**Sibling (shipped):** drag-and-drop polish lives in [`drag-and-drop.md`](drag-and-drop.md) (P1 #3) — layered on this feature’s click-to-move `Board`; not part of local-2-player v1 scope.
 
 ## Piece graphics (M4)
 
@@ -42,7 +43,7 @@ Tracks **[feature] work items P0 #2 and P0 #3** on [`docs/roadmap.md`](../roadma
 | **Render** | `Piece.tsx` only — `Square` and `PromotionModal` keep existing props |
 | **Sizing** | ~85% of square cell; verify board + promotion modal at mobile width |
 
-**M4 non-goals:** drag ghosts, user-selectable sets, AI-generated art.
+**M4 non-goals:** user-selectable sets, AI-generated art. (Floating drag preview shipped later in [`drag-and-drop.md`](drag-and-drop.md).)
 
 
 **Future hook:** swap asset directory or `Piece` implementation for a custom stroke set without touching board interaction code.
@@ -56,6 +57,7 @@ Implemented in M1 where noted; remainder land in later milestones.
 - **Engine-agnostic reducer actions:** dispatch `MOVE_MADE`, not `HUMAN_MOVED` — **Done** (M1)
 - **Worker mount point** in `App.tsx` reserved for Stockfish (comment only until P1 vs-AI) — **Done** (M1)
 - **Piece render swap seam:** `Piece.tsx` + `src/assets/pieces/` centralize assets — **Done** (M4)
+- **Pointer drag overlay:** same `onMove` / `onPromotionRequest` path as click-to-move — **Done** (P1 #3; see [`drag-and-drop.md`](drag-and-drop.md))
 
 ## Code paths
 
