@@ -15,7 +15,7 @@ Tracks **[feature] work items P0 #2 and P0 #3** on [`docs/roadmap.md`](../roadma
 - Vite + React + TypeScript (strict) + Tailwind
 - `src/engine.ts` — thin typed wrapper over `chess.js` (fen, legal moves, move, undo, game-over, promotion)
 - `src/gameReducer.ts` + `src/hooks/useGame.ts` — components never touch `chess.js` directly
-- Custom `Board` / `Square` / `Piece` — click-to-move, white on bottom; **Cburnett SVG pieces** (M4)
+- Custom `Board` / `Square` / `Piece` — drag-and-drop moves, white on bottom; **Cburnett SVG pieces** (M4)
 - Legal-move highlighting when a piece is selected
 - `MoveList` — move list and PGN display
 - `GameStatus` — check, checkmate, stalemate, draw (all draw types `chess.js` reports)
@@ -29,7 +29,7 @@ Tracks **[feature] work items P0 #2 and P0 #3** on [`docs/roadmap.md`](../roadma
 - Deploy, online play, clocks, puzzles, FEN import UI, persistence
 - Custom brand-aligned stroke piece art, multiple themes, piece animations (optional P2 polish)
 
-**Sibling (shipped):** drag-and-drop polish lives in [`drag-and-drop.md`](drag-and-drop.md) (P1 #3) — layered on this feature’s click-to-move `Board`; not part of local-2-player v1 scope.
+**Sibling (shipped):** drag-and-drop board interaction lives in [`drag-and-drop.md`](drag-and-drop.md) (P1 #3).
 
 ## Piece graphics (M4)
 
@@ -57,7 +57,7 @@ Implemented in M1 where noted; remainder land in later milestones.
 - **Engine-agnostic reducer actions:** dispatch `MOVE_MADE`, not `HUMAN_MOVED` — **Done** (M1)
 - **Worker mount point** in `App.tsx` reserved for Stockfish (comment only until P1 vs-AI) — **Done** (M1)
 - **Piece render swap seam:** `Piece.tsx` + `src/assets/pieces/` centralize assets — **Done** (M4)
-- **Pointer drag overlay:** same `onMove` / `onPromotionRequest` path as click-to-move — **Done** (P1 #3; see [`drag-and-drop.md`](drag-and-drop.md))
+- **Pointer drag overlay:** same `onMove` / `onPromotionRequest` path as click-to-select — **Done** (P1 #3; see [`drag-and-drop.md`](drag-and-drop.md))
 
 ## Code paths
 

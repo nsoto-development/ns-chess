@@ -45,8 +45,7 @@ function App() {
             id="board-move-hint"
             className="m-0 max-w-lg text-center text-[length:var(--text-xs)] leading-snug text-[var(--text-tertiary)]"
           >
-            Drag a piece to a highlighted square, or click a piece and then its
-            destination.
+            Drag a piece to a highlighted square.
           </p>
         </section>
 
