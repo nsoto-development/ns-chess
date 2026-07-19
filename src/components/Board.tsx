@@ -141,6 +141,9 @@ export function Board({ state, disabled = false, onMove, onPromotionRequest }: B
       setDrag(null);
 
       if (!activeDrag.hasMoved) {
+        // Selection already set on pointerdown; suppress the follow-up click so it
+        // does not immediately toggle the piece off.
+        suppressClicksUntilRef.current = Date.now() + 250;
         return;
       }
 
@@ -180,6 +183,15 @@ export function Board({ state, disabled = false, onMove, onPromotionRequest }: B
         return;
       }
 
+      // Re-pressing the selected piece clears selection (click-to-move affordance).
+      if (selectedSquare === from) {
+        setSelectedSquare(null);
+        return;
+      }
+
+      // Show legal targets immediately — same as classic click-to-move.
+      setSelectedSquare(from);
+
       const bounds = target.getBoundingClientRect();
       const nextDrag: DragState = {
         pointerId: event.pointerId,
@@ -197,7 +209,7 @@ export function Board({ state, disabled = false, onMove, onPromotionRequest }: B
       dragRef.current = nextDrag;
       setDrag(nextDrag);
     },
-    [board, disabled, state.turn],
+    [board, disabled, selectedSquare, state.turn],
   );
 
   const handlePointerMove = useCallback((event: ReactPointerEvent<HTMLDivElement>) => {
@@ -216,10 +228,6 @@ export function Board({ state, disabled = false, onMove, onPromotionRequest }: B
       y: event.clientY,
       hasMoved: activeDrag.hasMoved || distance >= DRAG_THRESHOLD_PX,
     };
-
-    if (nextDrag.hasMoved && !activeDrag.hasMoved) {
-      setSelectedSquare(activeDrag.from);
-    }
 
     dragRef.current = nextDrag;
     setDrag(nextDrag);
@@ -241,7 +249,7 @@ export function Board({ state, disabled = false, onMove, onPromotionRequest }: B
         onPointerUp={(event) => finishDrag(event)}
         onPointerCancel={(event) => finishDrag(event, true)}
       >
-        {Array.from({ length: 8 }, (_, displayRank) => 7 - displayRank).flatMap(
+        {Array.from({ length: 8 }, (_, rank) => rank).flatMap(
           (rank) =>
             Array.from({ length: 8 }, (_, file) => {
               const square = toAlgebraic(rank, file);

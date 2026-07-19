@@ -94,5 +94,5 @@ Flat `src/` layout — no nested `chess/` or `state/` folders at this scope.
 ## Tests / verify
 
 - `src/engine.test.ts` — rules, promotion, castling, en passant, game-over
-- `src/gameReducer.test.ts` — `NEW_GAME`, `MOVE_MADE`, `UNDO`, `PROMOTION_PENDING`, illegal-move guard, Strict Mode regression, promotion flow, checkmate, stalemate, castling, en passant
+- `src/gameReducer.test.ts` — `NEW_GAME`, `MOVE_MADE`, `UNDO` (including vs-AI pair undo), `PROMOTION_PENDING`, illegal-move guard, Strict Mode regression, promotion flow, checkmate, stalemate, castling, en passant
 - `npm test`, `npm run build`

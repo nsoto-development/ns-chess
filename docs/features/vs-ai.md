@@ -23,8 +23,9 @@ Tracks **[feature] work item P1 #2** on [`docs/roadmap.md`](../roadmap.md). Depe
 | Decision | Choice |
 |----------|--------|
 | Colors | Human plays **White**; AI plays **Black** |
+| Board orientation | White at the bottom (standard perspective) |
 | AI promotion | Auto-queen (`promotion: 'q'` in `MoveInput`) |
-| Undo | One ply (same as local); no human+AI pair undo |
+| Undo | In vs-AI, undo returns to the human’s turn (AI reply + human move when the last ply was the AI’s; human move only while the engine is thinking). Local mode stays one ply. |
 | Engine package | Stockfish.js WASM, pinned in `package.json`, loaded via Vite worker |
 
 ## Non-goals (v1)
@@ -52,7 +53,7 @@ Tracks **[feature] work item P1 #2** on [`docs/roadmap.md`](../roadmap.md). Depe
 
 | # | Milestone | Status | Deliverables |
 |---|-----------|--------|--------------|
-| M1 | Playable vs-AI | Done | Stockfish in a Web Worker + UCI in `src/stockfish.ts`; Local / vs-AI mode toggle; after a human move, AI replies via `MOVE_MADE`; board disabled on AI turn / while waiting; fixed depth or short movetime (no difficulty UI yet); ignore stale replies on New game / mode switch |
+| M1 | Playable vs-AI | Done | Stockfish in a Web Worker + UCI in `src/stockfish.ts`; Local / vs-AI mode toggle; after a human move, AI replies via `MOVE_MADE`; board disabled on AI turn / while waiting; fixed depth; ignore stale replies on New game / mode switch; vs-AI undo returns to White’s turn; board oriented White-at-bottom |
 | M2 | Difficulty + thinking | Planned | Easy / Medium / Hard presets (depth or movetime); “Thinking…” indicator; polish loading/engine-ready messaging if needed |
 
 **Quick gate:** each implementation thread names **one milestone**, not the whole work item. Prefer branches `feature/vs-ai-m1` then `feature/vs-ai-m2`.
@@ -61,7 +62,7 @@ Tracks **[feature] work item P1 #2** on [`docs/roadmap.md`](../roadmap.md). Depe
 
 Automated (where cheap):
 
-- Reducer / mode / thinking-state unit tests when those fields land
+- Reducer / mode / vs-AI `UNDO` unit tests
 - `npm test`, `npm run build`, `npm run lint`
 
 Manual:
@@ -71,4 +72,7 @@ Manual:
 - New game / switch to Local mid-search: no stale AI move applied
 - AI promotion to last rank auto-queens
 - Board stays locked while AI is thinking and on Black’s turn
+- Undo after an AI reply restores White’s turn (does not leave Black to move / re-trigger AI)
+- Undo while the engine is thinking removes only the human’s last move
+- Board shows White at the bottom
 - (M2) Difficulty presets change search strength; thinking indicator shows during search

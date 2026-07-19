@@ -11,7 +11,7 @@
 
 M3 is **shipped** — local 2-player MVP is complete: move list / PGN, game status, undo, new game, and promotion modal (Q/R/B/N).
 
-**After MVP:** P1 #3 drag-and-drop moves is **shipped** (see [`features/drag-and-drop.md`](features/drag-and-drop.md)) — additive polish on click-to-move; not part of the MVP launch bar.
+**After MVP:** P1 #3 drag-and-drop and P1 #2 vs-AI **M1** (playable Stockfish) are **shipped** — see [`features/drag-and-drop.md`](features/drag-and-drop.md) and [`features/vs-ai.md`](features/vs-ai.md). Not part of the MVP launch bar.
 
 ## MVP bar (v1 target)
 
