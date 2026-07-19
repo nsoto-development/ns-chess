@@ -2,7 +2,7 @@
 
 ## Purpose
 
-Add direct manipulation to the chessboard so mouse and touch users can drag a piece to a legal destination. Drag-and-drop is additive polish: click-to-move remains the accessible fallback and both interactions use the same move pipeline.
+Add direct manipulation to the chessboard so mouse and touch users can drag a piece to a legal destination. Click-to-select remains available; both paths use the same move pipeline.
 
 ## Roadmap
 
@@ -16,7 +16,7 @@ Tracks **[feature] work item P1 #3** on [`docs/roadmap.md`](../roadmap.md).
 - Legal destinations use the existing move highlighting
 - Legal drops call the existing `onMove` or `onPromotionRequest` callback
 - Illegal drops and pointer cancellation leave the position unchanged
-- Click-to-move continues to work
+- Click-to-select continues to work as an alternate path
 
 ## Non-goals
 
@@ -33,7 +33,7 @@ Tracks **[feature] work item P1 #3** on [`docs/roadmap.md`](../roadmap.md).
 - Re-pressing the selected piece clears the selection.
 - The board captures the active pointer so releasing outside the board cancels cleanly.
 - Touch gestures that begin on the board are reserved for moving pieces; page scrolling remains available outside the board.
-- Click-to-move remains the keyboard-compatible interaction path.
+- Click-to-select remains available without dragging.
 
 ## Code paths
 
@@ -48,7 +48,7 @@ Tracks **[feature] work item P1 #3** on [`docs/roadmap.md`](../roadmap.md).
 
 | # | Milestone | Status | Deliverables |
 |---|---|---|---|
-| M1 | Pointer drag-and-drop | Done | Mouse/touch dragging, floating preview, legal-drop and promotion routing, click-to-move compatibility |
+| M1 | Pointer drag-and-drop | Done | Mouse/touch dragging, floating preview, legal-drop and promotion routing; click-to-select still works |
 
 ## Verification
 
@@ -63,6 +63,6 @@ Manual:
 - Drag a legal move with a mouse and with touch input.
 - Confirm legal targets appear on piece select (pointer-down), not only after the drag threshold.
 - Drop on an illegal square and outside the board; confirm no move occurs.
-- Click a piece and then a legal target; confirm click-to-move still works.
+- Click a piece and then a legal target; confirm that path still works.
 - Drag a pawn to the last rank; confirm the promotion picker opens.
 - Confirm dragging is unavailable while the board is disabled.

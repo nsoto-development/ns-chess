@@ -51,8 +51,8 @@ function App() {
             className="m-0 max-w-lg text-center text-[length:var(--text-xs)] leading-snug text-[var(--text-tertiary)]"
           >
             {state.mode === 'vsAI'
-              ? 'You play White. Drag or click to move; the engine replies as Black.'
-              : 'Drag a piece to a highlighted square, or click a piece and then its destination.'}
+              ? 'You play White. Drag a piece to move; the engine replies as Black.'
+              : 'Drag a piece to a highlighted square.'}
           </p>
         </section>
 
