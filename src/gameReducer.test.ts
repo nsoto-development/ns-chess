@@ -232,4 +232,80 @@ describe('gameReducer', () => {
     expect(captured.moveHistory.at(-1)).toBe('exf6');
     expect(captured.engine.board()[3][5]).toBeNull();
   });
+
+  it('preserves mode on NEW_GAME', () => {
+    const vsAi = gameReducer(createInitialState(), {
+      type: 'SET_MODE',
+      mode: 'vsAI',
+    });
+    const afterMove = gameReducer(vsAi, {
+      type: 'MOVE_MADE',
+      move: { from: 'e2', to: 'e4' },
+    });
+    const reset = gameReducer(afterMove, { type: 'NEW_GAME' });
+
+    expect(reset.mode).toBe('vsAI');
+    expect(reset.fen).toBe(STARTING_FEN);
+    expect(reset.moveHistory).toEqual([]);
+  });
+
+  it('SET_MODE starts a fresh game in that mode', () => {
+    const afterMove = gameReducer(createInitialState(), {
+      type: 'MOVE_MADE',
+      move: { from: 'e2', to: 'e4' },
+    });
+    const switched = gameReducer(afterMove, {
+      type: 'SET_MODE',
+      mode: 'vsAI',
+    });
+
+    expect(switched.mode).toBe('vsAI');
+    expect(switched.fen).toBe(STARTING_FEN);
+    expect(switched.turn).toBe('w');
+    expect(switched.moveHistory).toEqual([]);
+  });
+
+  it('UNDO in vs-AI steps back to the human turn after an AI reply', () => {
+    const vsAi = gameReducer(createInitialState(), {
+      type: 'SET_MODE',
+      mode: 'vsAI',
+    });
+    const afterPair = playMoves(vsAi, [
+      { from: 'e2', to: 'e4' },
+      { from: 'e7', to: 'e5' },
+    ]);
+    const undone = gameReducer(afterPair, { type: 'UNDO' });
+
+    expect(undone.moveHistory).toEqual([]);
+    expect(undone.turn).toBe('w');
+    expect(undone.mode).toBe('vsAI');
+    expect(undone.fen).toBe(STARTING_FEN);
+  });
+
+  it('UNDO in vs-AI while the engine is thinking removes only the human move', () => {
+    const vsAi = gameReducer(createInitialState(), {
+      type: 'SET_MODE',
+      mode: 'vsAI',
+    });
+    const afterHuman = gameReducer(vsAi, {
+      type: 'MOVE_MADE',
+      move: { from: 'e2', to: 'e4' },
+    });
+    const undone = gameReducer(afterHuman, { type: 'UNDO' });
+
+    expect(undone.moveHistory).toEqual([]);
+    expect(undone.turn).toBe('w');
+    expect(undone.mode).toBe('vsAI');
+  });
+
+  it('UNDO in local mode still steps back a single ply', () => {
+    const afterPair = playMoves(createInitialState(), [
+      { from: 'e2', to: 'e4' },
+      { from: 'e7', to: 'e5' },
+    ]);
+    const undone = gameReducer(afterPair, { type: 'UNDO' });
+
+    expect(undone.moveHistory).toEqual(['e4']);
+    expect(undone.turn).toBe('b');
+  });
 });

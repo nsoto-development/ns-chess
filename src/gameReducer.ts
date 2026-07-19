@@ -19,7 +19,8 @@ export type GameState = {
 };
 
 export type GameAction =
-  | { type: 'NEW_GAME' }
+  | { type: 'NEW_GAME'; mode?: GameMode }
+  | { type: 'SET_MODE'; mode: GameMode }
   | { type: 'MOVE_MADE'; move: MoveInput }
   | { type: 'PROMOTION_PENDING'; from: string; to: string }
   | { type: 'UNDO' };
@@ -64,7 +65,10 @@ export function createInitialState(): GameState {
 export function gameReducer(state: GameState, action: GameAction): GameState {
   switch (action.type) {
     case 'NEW_GAME':
-      return syncFromEngine(createEngine());
+      return syncFromEngine(createEngine(), action.mode ?? state.mode);
+
+    case 'SET_MODE':
+      return syncFromEngine(createEngine(), action.mode);
 
     case 'PROMOTION_PENDING': {
       const engine = createEngine(state.fen);
@@ -95,7 +99,12 @@ export function gameReducer(state: GameState, action: GameAction): GameState {
         return state;
       }
 
-      const engine = engineFromHistory(state.moveHistory.slice(0, -1));
+      // In vs-AI the human is White; undo back to their turn so the AI does not
+      // immediately replay. Drop the AI reply + the human move when the last ply
+      // was the AI's (even history length), otherwise just the human's move.
+      const plies =
+        state.mode === 'vsAI' && state.moveHistory.length % 2 === 0 ? 2 : 1;
+      const engine = engineFromHistory(state.moveHistory.slice(0, -plies));
       return syncFromEngine(engine, state.mode);
     }
   }

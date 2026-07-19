@@ -11,6 +11,8 @@
 
 M3 is **shipped** — local 2-player MVP is complete: move list / PGN, game status, undo, new game, and promotion modal (Q/R/B/N). Board interaction is drag-and-drop (see [`features/drag-and-drop.md`](features/drag-and-drop.md)).
 
+**After MVP:** P1 #2 vs-AI **M1** (playable Stockfish) is **shipped** — see [`features/vs-ai.md`](features/vs-ai.md). Not part of the MVP launch bar.
+
 ## MVP bar (v1 target)
 
 **Local 2-player chess runs locally via `npm run dev`** — two humans play a full rules-legal game on one device in the browser. No deploy required for MVP.

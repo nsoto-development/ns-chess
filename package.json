@@ -8,14 +8,16 @@
     "build": "tsc -b && vite build",
     "preview": "vite preview",
     "test": "vitest run",
-    "lint": "oxlint"
+    "lint": "oxlint",
+    "sync:stockfish": "node scripts/sync-stockfish.mjs"
   },
   "dependencies": {
     "@nsoto/portfolio-tokens": "^0.1.0",
     "@nsoto/portfolio-ui": "^0.1.0",
     "chess.js": "^1.4.0",
     "react": "^19.1.0",
-    "react-dom": "^19.1.0"
+    "react-dom": "^19.1.0",
+    "stockfish": "^18.0.8"
   },
   "devDependencies": {
     "@tailwindcss/vite": "^4.1.11",

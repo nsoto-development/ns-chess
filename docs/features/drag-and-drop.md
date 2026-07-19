@@ -28,7 +28,9 @@ Tracks **[feature] work item P1 #3** on [`docs/roadmap.md`](../roadmap.md).
 ## Interaction decisions
 
 - Dragging begins only for a piece belonging to the side to move.
-- A short movement threshold distinguishes a drag from a click.
+- Pointer-down on an own piece selects it immediately and shows legal-move highlights (same as classic click-to-move).
+- A short movement threshold distinguishes a drag (floating ghost) from a click that keeps the selection.
+- Re-pressing the selected piece clears the selection.
 - The board captures the active pointer so releasing outside the board cancels cleanly.
 - Touch gestures that begin on the board are reserved for moving pieces; page scrolling remains available outside the board.
 - Click-to-select remains available without dragging.
@@ -59,7 +61,7 @@ Automated:
 Manual:
 
 - Drag a legal move with a mouse and with touch input.
-- Confirm legal targets appear only after the drag threshold.
+- Confirm legal targets appear on piece select (pointer-down), not only after the drag threshold.
 - Drop on an illegal square and outside the board; confirm no move occurs.
 - Click a piece and then a legal target; confirm that path still works.
 - Drag a pawn to the last rank; confirm the promotion picker opens.

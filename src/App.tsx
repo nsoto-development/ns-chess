@@ -5,8 +5,8 @@ import { MoveList } from './components/MoveList';
 import { PromotionModal } from './components/PromotionModal';
 import { Button } from './components/ui/Button';
 import { useGame } from './hooks/useGame';
+import type { GameMode } from './types';
 
-// P1 vs-AI: mount Stockfish Web Worker here (see docs/features/vs-ai.md).
 function App() {
   const {
     state,
@@ -14,10 +14,15 @@ function App() {
     requestPromotion,
     completePromotion,
     newGame,
+    setMode,
     undo,
     canUndo,
     isInteractive,
+    aiBusy,
   } = useGame();
+
+  const modeLabel = (mode: GameMode) =>
+    mode === 'vsAI' ? 'Vs AI' : 'Local';
 
   return (
     <main
@@ -45,12 +50,37 @@ function App() {
             id="board-move-hint"
             className="m-0 max-w-lg text-center text-[length:var(--text-xs)] leading-snug text-[var(--text-tertiary)]"
           >
-            Drag a piece to a highlighted square.
+            {state.mode === 'vsAI'
+              ? 'You play White. Drag a piece to move; the engine replies as Black.'
+              : 'Drag a piece to a highlighted square.'}
           </p>
         </section>
 
         <aside className="flex w-full min-w-0 max-w-md flex-col gap-4 lg:w-80">
-          <GameStatus engine={state.engine} turn={state.turn} />
+          <div
+            className="flex gap-2"
+            role="group"
+            aria-label="Game mode"
+          >
+            {(['local', 'vsAI'] as const).map((mode) => (
+              <Button
+                key={mode}
+                variant={state.mode === mode ? 'primary' : 'secondary'}
+                size="md"
+                onClick={() => setMode(mode)}
+                aria-pressed={state.mode === mode}
+                style={{ flex: 1 }}
+              >
+                {modeLabel(mode)}
+              </Button>
+            ))}
+          </div>
+
+          <GameStatus
+            engine={state.engine}
+            turn={state.turn}
+            aiBusy={state.mode === 'vsAI' && aiBusy}
+          />
 
           <div className="flex gap-2">
             <Button
