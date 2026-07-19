@@ -19,7 +19,8 @@ export type GameState = {
 };
 
 export type GameAction =
-  | { type: 'NEW_GAME' }
+  | { type: 'NEW_GAME'; mode?: GameMode }
+  | { type: 'SET_MODE'; mode: GameMode }
   | { type: 'MOVE_MADE'; move: MoveInput }
   | { type: 'PROMOTION_PENDING'; from: string; to: string }
   | { type: 'UNDO' };
@@ -64,7 +65,10 @@ export function createInitialState(): GameState {
 export function gameReducer(state: GameState, action: GameAction): GameState {
   switch (action.type) {
     case 'NEW_GAME':
-      return syncFromEngine(createEngine());
+      return syncFromEngine(createEngine(), action.mode ?? state.mode);
+
+    case 'SET_MODE':
+      return syncFromEngine(createEngine(), action.mode);
 
     case 'PROMOTION_PENDING': {
       const engine = createEngine(state.fen);

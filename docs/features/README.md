@@ -18,7 +18,7 @@ I include them in this portfolio repo to show what I strive to have for document
 | Doc                                      | Capability                                                            |
 | ---------------------------------------- | --------------------------------------------------------------------- |
 | `[local-2-player.md](local-2-player.md)` | Hot-seat chess — board, moves, status, promotion (P0; **M3 shipped**) |
-| `[vs-ai.md](vs-ai.md)`                   | Stockfish opponent in a Web Worker (P1; **M1 planned**)               |
+| `[vs-ai.md](vs-ai.md)`                   | Stockfish opponent in a Web Worker (P1; **M1 shipped**)               |
 | `[drag-and-drop.md](drag-and-drop.md)`   | Mouse and touch piece dragging layered on click-to-move (P1; **M1 shipped**) |
 
 

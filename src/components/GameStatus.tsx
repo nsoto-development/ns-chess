@@ -4,9 +4,15 @@ import { Badge } from './ui/Badge';
 type GameStatusProps = {
   engine: ChessEngine;
   turn: 'w' | 'b';
+  /** Minimal M1 busy hint — full thinking chrome is M2. */
+  aiBusy?: boolean;
 };
 
-function statusMessage(engine: ChessEngine, turn: 'w' | 'b'): string {
+function statusMessage(
+  engine: ChessEngine,
+  turn: 'w' | 'b',
+  aiBusy: boolean,
+): string {
   if (engine.isCheckmate()) {
     const winner = turn === 'w' ? 'Black' : 'White';
     return `Checkmate — ${winner} wins`;
@@ -18,6 +24,10 @@ function statusMessage(engine: ChessEngine, turn: 'w' | 'b'): string {
 
   if (engine.isDraw()) {
     return 'Draw';
+  }
+
+  if (aiBusy) {
+    return 'Engine thinking…';
   }
 
   if (engine.isCheck()) {
@@ -45,9 +55,9 @@ function statusTone(
   return 'brand';
 }
 
-export function GameStatus({ engine, turn }: GameStatusProps) {
-  const message = statusMessage(engine, turn);
-  const tone = statusTone(engine);
+export function GameStatus({ engine, turn, aiBusy = false }: GameStatusProps) {
+  const message = statusMessage(engine, turn, aiBusy);
+  const tone = aiBusy && !engine.isGameOver() ? 'neutral' : statusTone(engine);
   const showDot = engine.isCheck() || engine.isCheckmate();
 
   return (

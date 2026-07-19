@@ -52,7 +52,7 @@ Tracks **[feature] work item P1 #2** on [`docs/roadmap.md`](../roadmap.md). Depe
 
 | # | Milestone | Status | Deliverables |
 |---|-----------|--------|--------------|
-| M1 | Playable vs-AI | Planned | Stockfish in a Web Worker + UCI in `src/stockfish.ts`; Local / vs-AI mode toggle; after a human move, AI replies via `MOVE_MADE`; board disabled on AI turn / while waiting; fixed depth or short movetime (no difficulty UI yet); ignore stale replies on New game / mode switch |
+| M1 | Playable vs-AI | Done | Stockfish in a Web Worker + UCI in `src/stockfish.ts`; Local / vs-AI mode toggle; after a human move, AI replies via `MOVE_MADE`; board disabled on AI turn / while waiting; fixed depth or short movetime (no difficulty UI yet); ignore stale replies on New game / mode switch |
 | M2 | Difficulty + thinking | Planned | Easy / Medium / Hard presets (depth or movetime); “Thinking…” indicator; polish loading/engine-ready messaging if needed |
 
 **Quick gate:** each implementation thread names **one milestone**, not the whole work item. Prefer branches `feature/vs-ai-m1` then `feature/vs-ai-m2`.

@@ -2,7 +2,7 @@
 
 Browser chess built as a portfolio piece — hand-crafted UI on top of proven rule logic, with room to grow into a Stockfish opponent later.
 
-**Status:** Local 2-player MVP complete (M3); P1 drag-and-drop moves shipped. Next focus: vs-AI.
+**Status:** Local 2-player MVP complete; drag-and-drop and vs-AI M1 (playable Stockfish) shipped. Next: vs-AI difficulty / thinking (M2).
 
 Planned live URL: [chess.nsoto.dev](https://chess.nsoto.dev) (P2)
 
@@ -48,11 +48,17 @@ Rule logic lives in a thin [`chess.js`](https://github.com/jhlywa/chess.js) wrap
 - Click-to-move remains the accessible fallback
 - Spec: [`docs/features/drag-and-drop.md`](docs/features/drag-and-drop.md)
 
+### Shipped — P1 #2 vs-AI M1
+
+- Stockfish 18 lite (single-threaded WASM) in a Web Worker + UCI wrapper (`src/stockfish.ts`)
+- Local / Vs AI mode toggle; human plays White; AI replies via `MOVE_MADE`
+- Spec: [`docs/features/vs-ai.md`](docs/features/vs-ai.md)
+
 ### Later
 
 | Priority | Feature |
 |----------|---------|
-| P1 | Vs-AI opponent (Stockfish in a Web Worker) |
+| P1 | Vs-AI M2 — difficulty presets + thinking polish |
 | P2 | Deploy to `chess.nsoto.dev` |
 
 See [`docs/roadmap.md`](docs/roadmap.md) for the full backlog.
@@ -63,15 +69,16 @@ See [`docs/roadmap.md`](docs/roadmap.md) for the full backlog.
 - **Build:** Vite 7
 - **Styling:** Tailwind CSS v4
 - **Rules:** chess.js 1.4 (wrapped in `src/engine.ts`, not reimplemented)
+- **Engine (vs-AI):** Stockfish.js WASM via Web Worker (`public/engine/`)
 - **Tests:** Vitest
 - **Tooling:** Node 22 (pinned via [Volta](https://volta.sh) in `package.json`)
-- **AI (planned):** Stockfish.js via Web Worker + UCI layer
 
 ## Architecture
 
 ```
 src/
 ├── engine.ts          # chess.js wrapper — rules only
+├── stockfish.ts       # Stockfish Web Worker + UCI client
 ├── gameReducer.ts     # game state and actions
 ├── hooks/useGame.ts   # React hook for components
 ├── types.ts           # GameMode, MoveInput, …
@@ -79,9 +86,9 @@ src/
 └── App.tsx
 ```
 
-AI moves (when added) will use the same `MOVE_MADE` reducer path as human moves — no duplicate state logic.
+AI moves use the same `MOVE_MADE` reducer path as human moves — no duplicate state logic.
 
-Details: [`docs/features/local-2-player.md`](docs/features/local-2-player.md)
+Details: [`docs/features/local-2-player.md`](docs/features/local-2-player.md), [`docs/features/vs-ai.md`](docs/features/vs-ai.md)
 
 ## Getting started
 
@@ -121,6 +128,8 @@ Do **not** push version bumps or tags straight to `main` outside that PR path.
 ## Credits
 
 Chess piece SVGs: **Cburnett** set by Colin M. L. Burnett ([CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/)). See [`src/assets/pieces/ATTRIBUTION.md`](src/assets/pieces/ATTRIBUTION.md).
+
+Stockfish.js WASM engine: Nathan Rugg / Chess.com ([GPL-3.0](https://www.gnu.org/licenses/gpl-3.0.html)). Bundled under [`public/engine/`](public/engine/); see [`public/engine/Copying.txt`](public/engine/Copying.txt).
 
 ## License
 
