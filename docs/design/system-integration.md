@@ -65,7 +65,7 @@ Manual pass after DS-touching changes (`npm test`, `npm run build`, `npm run lin
 - [ ] **Controls** — Undo / New game use DS button chrome; disabled Undo looks inactive.
 - [ ] **Status** — Badge reflects turn, check, checkmate, stalemate/draw with expected variant colors.
 - [ ] **Move list** — Card border/background; PGN in mono (`--font-code`).
-- [ ] **Board** — Light/dark squares use gray tokens; selection ring uses `--focus-ring`; legal targets show brand tint; Cburnett pieces crisp at 1x/2x.
+- [ ] **Board** — Light/dark squares use gray tokens; selection ring uses `--focus-ring`; legal targets show brand tint; Cburnett pieces crisp at 1x/2x; drag ghost (when dragging) matches piece contrast on light/dark squares.
 - [ ] **Promotion** — Dialog opens on pawn promotion; piece choices dismiss modal and complete move.
 - [ ] **Playthrough** — Full game: moves, capture, castle, en passant if exercised, undo, new game reset.
 - [ ] **No regressions** — No `stone-*` / `amber-*` on public surfaces; no raw `@nsoto/*` imports outside `ui/` wrappers / `index.css`.

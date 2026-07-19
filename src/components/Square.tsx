@@ -8,6 +8,7 @@ type SquareProps = {
   isLight: boolean;
   isSelected: boolean;
   isLegalTarget: boolean;
+  isDragging?: boolean;
   disabled?: boolean;
   onClick: () => void;
 };
@@ -18,12 +19,14 @@ export function Square({
   isLight,
   isSelected,
   isLegalTarget,
+  isDragging = false,
   disabled = false,
   onClick,
 }: SquareProps) {
   const squareStyle: CSSProperties = {
     backgroundColor: isLight ? 'var(--gray-700)' : 'var(--gray-900)',
     ...(isSelected && { boxShadow: 'inset 0 0 0 2px var(--focus-ring)' }),
+    ...(piece && !disabled && { cursor: isDragging ? 'grabbing' : 'grab' }),
     ...(disabled && { cursor: 'not-allowed', opacity: 0.8 }),
   };
 
@@ -47,10 +50,16 @@ export function Square({
       style={squareStyle}
       aria-label={square}
       disabled={disabled}
+      data-square={square}
       onClick={onClick}
     >
       {piece && (
-        <Piece type={piece.type} color={piece.color} squareTone={isLight ? 'light' : 'dark'} />
+        <span
+          className="flex h-full w-full items-center justify-center"
+          style={{ opacity: isDragging ? 0.25 : 1 }}
+        >
+          <Piece type={piece.type} color={piece.color} squareTone={isLight ? 'light' : 'dark'} />
+        </span>
       )}
       {isLegalTarget && (
         <span
