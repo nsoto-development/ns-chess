@@ -2,13 +2,13 @@
 
 Browser chess built as a portfolio piece — hand-crafted UI on top of proven rule logic, with room to grow into a Stockfish opponent later.
 
-**Status:** Local 2-player MVP complete (M3); P1 drag-and-drop moves shipped. Next focus: vs-AI.
+**Status:** Local 2-player MVP complete (M3). Next focus: vs-AI.
 
 Planned live URL: [chess.nsoto.dev](https://chess.nsoto.dev) (P2)
 
 ## About
 
-A two player full rules-legal game on one screen — hot-seat, client-side, no backend. The interesting part for this repo is the **frontend**: a custom board with click-to-move and drag-and-drop, legal-move highlighting, and game state — not a drop-in component like `react-chessboard`.
+A two player full rules-legal game on one screen — hot-seat, client-side, no backend. The interesting part for this repo is the **frontend**: a custom board with drag-and-drop moves, legal-move highlighting, and game state — not a drop-in component like `react-chessboard`.
 
 Rule logic lives in a thin [`chess.js`](https://github.com/jhlywa/chess.js) wrapper (`src/engine.ts`). Components talk to a reducer hook, never to `chess.js` directly.
 
@@ -23,7 +23,7 @@ Rule logic lives in a thin [`chess.js`](https://github.com/jhlywa/chess.js) wrap
 
 ### Shipped — M2
 
-- `src/components/Board.tsx`, `Square.tsx`, `Piece.tsx` — click-to-move, legal-move highlighting, Cburnett SVG pieces
+- `src/components/Board.tsx`, `Square.tsx`, `Piece.tsx` — piece dragging, legal-move highlighting, Cburnett SVG pieces
 - Wired into `App.tsx`; white on bottom
 - `MOVE_MADE` uses a fresh engine from FEN (pure reducer; React Strict Mode safe)
 
@@ -40,13 +40,6 @@ Rule logic lives in a thin [`chess.js`](https://github.com/jhlywa/chess.js) wrap
 
 - Cburnett SVG chess pieces (`src/assets/pieces/`); `Piece.tsx` image render at 85% square
 - CC BY-SA attribution in `src/assets/pieces/ATTRIBUTION.md`
-
-### Shipped — P1 #3 drag-and-drop
-
-- Pointer Events drag (mouse + touch) with floating piece preview
-- Legal-drop and promotion routing reuse the click-to-move move path
-- Click-to-move remains the accessible fallback
-- Spec: [`docs/features/drag-and-drop.md`](docs/features/drag-and-drop.md)
 
 ### Later
 
